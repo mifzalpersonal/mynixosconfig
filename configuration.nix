@@ -35,6 +35,14 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  # Masukkan ini di dalam configuration.nix lu
+  fonts.packages = with pkgs; [
+    noto-fonts          # Font standar Google
+    noto-fonts-cjk-sans # <--- INI SAKTI NYA BUAT HURUF JEPANG/MANDARIN!
+    font-awesome        # Buat simbol dan ikon-ikon bar/widget
+    nerd-fonts.jetbrains-mono # Font keren buat terminal anak coding
+  ];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -105,6 +113,10 @@
      git
      vscode
      kitty
+     dolphin
+     steam
+     discord
+
    ];
 
    environment.shellAliases = {
