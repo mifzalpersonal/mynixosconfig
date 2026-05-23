@@ -25,6 +25,7 @@
 
       "exec-once" = [
         "caelestia shell"
+        "caelestia wallpaper set ~/Pictures/wallhaven-6omkp7.png"
       ];
     };
   };
