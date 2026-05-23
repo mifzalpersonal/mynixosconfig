@@ -13,7 +13,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixConfigurations = {
+    nixosConfigurations = {
       # 'nixos' ini sesuai dengan hostname laptop lu saat ini
       nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

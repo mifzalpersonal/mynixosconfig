@@ -107,8 +107,8 @@
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
 
     # Bonus: Cukup ketik 'rb' buat rebuild sistem biar cepet
-    rb = "sudo nixos-rebuild switch";
-    up = "sudo nixos-rebuild switch --upgrade";
+    rb = "sudo nixos-rebuild switch --flake .#nix";
+    up = "sudo nixos-rebuild switch --upgrade --flake .#nix";
   };
   
   users.users.ciel = {
