@@ -23,6 +23,8 @@
     };
   };
 
+  
+
   # Aktifkan modul internal Home Manager
   programs.home-manager.enable = true;
 }

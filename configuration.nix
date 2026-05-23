@@ -40,9 +40,11 @@
 
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
+  #services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-  
+  services.gnome.core-apps.enable = false;
+  services.gnome.core-developer-tools.enable = false;
+  services.gnome.games.enable = false;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -88,6 +90,8 @@
   };
 
   # programs.firefox.enable = true;
+  programs.hyprland.enable = true;
+  services.displayManager.ly.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -100,6 +104,7 @@
      brave
      git
      vscode
+     kitty
    ];
 
    environment.shellAliases = {
