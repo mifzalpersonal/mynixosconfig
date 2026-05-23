@@ -22,9 +22,11 @@
 
     # KASIH TAHU HYPRLAND BUAT JALANIN CAELESTIA PAS STARTUP
     "exec-once" = [
-      "caelestia"
+      "caelestia shell"
     ];
   };
+
+  xdg.configFile."hypr/hyprland.conf".force = true;
 
   # --- CONFIGURATION GIT DEKLARATIF ---
   programs.git = {
