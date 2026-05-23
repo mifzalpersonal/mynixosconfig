@@ -112,6 +112,13 @@
      discord
   ];
 
+  fonts.packages = with pkgs; [
+     noto-fonts
+     noto-fonts-cjk-sans       # Jurus anti kotak-kotak Jepang
+     font-awesome              # Ikon widget Caelestia
+     nerd-fonts.jetbrains-mono # Font terminal
+  ];
+
    environment.shellAliases = {
     # Cukup ketik 'gen' buat liat daftar generasi
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
