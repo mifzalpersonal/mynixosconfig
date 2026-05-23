@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, caelestia, ... }:
 
 {
   home.username = "ciel";
@@ -11,7 +11,17 @@
   home.packages = with pkgs; [
     # fastfetch
     # btop
+    caelestia.packages.${pkgs.system}.with-shell
   ];
+
+  wayland.windowManager.hyprland.settings = {
+    # ... settingan monitor dan keybindings lu kemarin ...
+
+    # 3. KASIH TAHU HYPRLAND BUAT JALANIN CAELESTIA PAS STARTUP
+    "exec-once" = [
+      "caelestia"
+    ];
+  };
 
   # --- CONFIGURATION GIT DEKLARATIF ---
   programs.git = {
