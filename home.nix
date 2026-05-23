@@ -1,4 +1,4 @@
-{ config, pkgs, caelestia, ... }:
+{ config, pkgs, inputs, ... }: #caelestia
 
 {
   home.username = "ciel";
@@ -11,7 +11,11 @@
   home.packages = with pkgs; [
     # fastfetch
     # btop
-    caelestia.packages.${pkgs.system}.with-shell
+    # caelestia.packages.${pkgs.system}.with-shell
+  ];
+
+  imports = [
+    inputs.caelestia.homeManagerModules.default
   ];
 
   caelestia = {
