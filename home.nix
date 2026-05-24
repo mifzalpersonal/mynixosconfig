@@ -1,4 +1,4 @@
-{ config, pkgs, caelestia, ... }: 
+{ config, pkgs, ... }: #caelestia
 
 {
   home.username = "ciel";
@@ -29,6 +29,11 @@
     extraConfig = {
       init.defaultBranch = "main";
     };
+  };
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome-themes-extra;
   };
 
   # Aktifkan modul internal Home Manager

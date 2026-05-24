@@ -32,7 +32,7 @@
             home-manager.useUserPackages = true;
             
             # Ini tempat ngirim variabel 'caelestia' ke dalam home.nix dengan bener
-            home-manager.extraSpecialArgs = { inherit inputs caelestia; };
+            # home-manager.extraSpecialArgs = { inherit inputs caelestia; };
             
             home-manager.users.ciel = import ./home.nix;
           }
