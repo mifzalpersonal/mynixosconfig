@@ -42,17 +42,22 @@
 
 
   # Enable the GNOME Desktop Environment.
-  #services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
   services.gnome.core-apps.enable = false;
   services.gnome.core-developer-tools.enable = false;
   services.gnome.games.enable = false;
 
+  environment.variables = {
+     WLR_NO_HARDWARE_CURSORS = "1";
+     GSK_RENDERER = "gl";
+  };
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
   
-  services.displayManager.defaultSession = "xfce";
+  # services.displayManager.defaultSession = "xfce";
 
 
   # Enable CUPS to print documents.

@@ -14,9 +14,9 @@
     # caelestia.packages.${pkgs.system}.with-shell
   ];
 
-  imports = [
-    ./modules/caelestia
-  ];
+  # imports = [
+  #   ./modules/caelestia
+  # ];
 
   # Ini ditaruh di luar blok Hyprland, tapi tetep di dalam kurung kurawal utama home.nix
   # xdg.configFile."hypr/hyprland.conf".force = true;
