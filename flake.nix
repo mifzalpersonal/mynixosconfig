@@ -8,12 +8,16 @@
     # Mengambil sumber paket dari Home Manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    
     # Caelestia CLI / Shell Source
-    caelestia.url = "github:caelestia-dots/cli";
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  
   };
 
-  outputs = { self, nixpkgs, home-manager, caelestia, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, caelestia-shell, ... }@inputs: {
     nixosConfigurations = {
       # 'nix' sesuai dengan hostname laptop lu saat ini
       nix = nixpkgs.lib.nixosSystem {
