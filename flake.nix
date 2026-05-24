@@ -10,14 +10,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     
     # Caelestia CLI / Shell Source
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # caelestia-shell = {
+    #  url = "github:caelestia-dots/shell";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    # };
   
   };
 
-  outputs = { self, nixpkgs, home-manager, caelestia-shell, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: { #caelestia-shell
     nixosConfigurations = {
       # 'nix' sesuai dengan hostname laptop lu saat ini
       nix = nixpkgs.lib.nixosSystem {
