@@ -112,7 +112,6 @@
      btop
      fastfetch
      brave
-     git
      vscode
      kitty
      steam
@@ -133,8 +132,8 @@
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
 
     # Bonus: Cukup ketik 'rb' buat rebuild sistem biar cepet
-    rb = "sudo nixos-rebuild switch --flake .#nix";
-    up = "sudo nixos-rebuild switch --upgrade --flake .#nix";
+    rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
+    up = "sudo nixos-rebuild switch --upgrade --flake /etc/nixos#nix";
   };
   
   users.users.ciel = {

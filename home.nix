@@ -17,7 +17,7 @@
     user.name = "mifzalpersonal";
     user.email = "mizakigaming89@gmail.com";
     init.defaultBranch = "main";
-  };
+          };
   };
 
   home.pointerCursor = {
