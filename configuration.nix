@@ -118,6 +118,7 @@
      steam
      thunar
      discord
+     kdePackages.dolphin
   ];
 
   fonts.packages = with pkgs; [
