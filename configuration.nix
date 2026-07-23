@@ -123,6 +123,7 @@
 
   # programs.firefox.enable = true;
   programs.hyprland.enable = true;
+  programs.niri.enable = true;
   services.displayManager.ly.enable = true;
 
   # List packages installed in system profile.
@@ -141,6 +142,7 @@
      discord
      kdePackages.dolphin
      niri
+     fuzzel
   ];
 
   fonts.packages = with pkgs; [
