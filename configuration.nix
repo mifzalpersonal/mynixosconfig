@@ -146,6 +146,7 @@
      alacritty
      libreoffice-fresh
      flatpak
+     file
   ];
 
   fonts.packages = with pkgs; [
