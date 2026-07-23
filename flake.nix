@@ -11,13 +11,16 @@
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel"; 
+    #https://github.com/xddxdd/nix-cachyos-kernel
+
+
   
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: { 
-    nixosConfigurations = {
-      # 'nix' sesuai dengan hostname laptop lu saat ini
-      nix = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs: { 
+    nixosConfigurations = { nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         specialArgs = { inherit inputs; };

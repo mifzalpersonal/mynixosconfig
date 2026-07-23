@@ -164,6 +164,21 @@
     #up = "sudo nixos-rebuild switch --upgrade --flake /etc/nixos#nix";
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
   };
+
+  # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
+  services.undervolt = {
+    enable = true;
+    
+    # Voltage Offset (dalam mV, pake angka negatif)
+    coreOffset = -100;   # CPU Core
+    gpuOffset = -25;     # Integrated GPU (Intel UHD 620)
+    uncoreOffset = -25;    # iGPU Unslice / Uncore (-25.4 mV)
+    
+    useTimer = true;
+    # Pengaturan Power Limit (Optional, biar makin adem)
+    # packagePowerLimitP1 = 25; # Short term boost (Watts)
+    # packagePowerLimitP2 = 15; # Long term sustained limit (Watts)
+  };
   
   users.users.ciel = {
     isNormalUser = true;
@@ -173,6 +188,21 @@
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
+  # --------------CACHY KERNEL-------------------
+  nixpkgs.overlays = [
+    inputs.nix-cachyos-kernel.overlays.default
+  ];
+
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-x86_64-v3;
+
+  #nix.settings = {
+  #  substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  #  trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  #};
+  # --------------------------------------
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
