@@ -143,6 +143,9 @@
      kdePackages.dolphin
      niri
      fuzzel
+     alacritty
+     libreoffice-fresh
+     flatpak
   ];
 
   fonts.packages = with pkgs; [
@@ -150,6 +153,7 @@
      noto-fonts-cjk-sans       # Jurus anti kotak-kotak Jepang
      font-awesome              # Ikon widget Caelestia
      nerd-fonts.jetbrains-mono # Font terminal
+     corefonts
   ];
 
    environment.shellAliases = {
