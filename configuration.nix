@@ -197,7 +197,7 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-x86_64-v3;
+  boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
 
   nix.settings = {
     substituters = [ 
