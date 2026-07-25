@@ -133,10 +133,17 @@
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      neovim
+
+     #larp
      btop
      fastfetch
+     yazi
+     tty-clock
+     pipes
+     lavat
+     #------
+
      brave
-     vscode
      kitty
      steam
      thunar
@@ -144,13 +151,39 @@
      #kdePackages.dolphin
      niri
      fuzzel
-     alacritty
      libreoffice-fresh
      flatpak
      file
      obs-studio
      cava
+     xwayland-satellite #its for xxwayland so steam can run
+
+    # devs thingy
+     laravel
+     mariadb
+     php
+     nodejs
+     clang
+     python313
+     vscode
+     go
+     docker
+    # --------
   ];
+
+  #-------------DEVSSS-------------
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
+
+  services.flatpak.enable = true;
+
+  virtualisation.docker = {
+    enable = true;
+  };
+  #--------------------------------
+
 
   fonts.packages = with pkgs; [
      noto-fonts
@@ -176,8 +209,7 @@
     dedicatedServer.openFirewall = true;
   };
 
-
-  # --------------APP SETTINGS---------------
+  # -----------------------------------------
 
   # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
   services.undervolt = {
@@ -197,7 +229,7 @@
   users.users.ciel = {
     isNormalUser = true;
     description = "ciel";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker"];
   };
 
   nixpkgs.config.allowUnfree = true;
