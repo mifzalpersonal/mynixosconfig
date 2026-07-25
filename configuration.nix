@@ -190,6 +190,15 @@
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    auto-optimise-store = true;
+  }; 
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
 
   # --------------CACHY KERNEL-------------------
@@ -197,18 +206,18 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
+  #boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
 
-  nix.settings = {
-    substituters = [ 
-      "https://cache.nixos.org" 
-      "https://attic.xuyh0120.win/lantian" 
-    ];
-    trusted-public-keys = [ 
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" 
-    ];
-  };
+  #nix.settings = {
+  #  substituters = [ 
+  #    "https://cache.nixos.org" 
+  #    "https://attic.xuyh0120.win/lantian" 
+  #  ];
+  #  trusted-public-keys = [ 
+  #    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+  #    "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" 
+  #  ];
+  #};
   # --------------------------------------
 
 

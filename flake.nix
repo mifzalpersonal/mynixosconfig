@@ -12,14 +12,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; 
+    #nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; 
     #https://github.com/xddxdd/nix-cachyos-kernel
 
 
   
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs: { 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {  #nix-cachyos-kernel
     nixosConfigurations = { nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
