@@ -147,6 +147,8 @@
      libreoffice-fresh
      flatpak
      file
+     obs-studio
+     steam
   ];
 
   fonts.packages = with pkgs; [
@@ -191,9 +193,9 @@
 
 
   # --------------CACHY KERNEL-------------------
-  nixpkgs.overlays = [
-    inputs.nix-cachyos-kernel.overlays.pinned
-  ];
+  #nixpkgs.overlays = [
+  #  inputs.nix-cachyos-kernel.overlays.pinned
+  #];
 
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-x86_64-v3;
 
