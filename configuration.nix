@@ -61,6 +61,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  programs.xwayland.enable = true;
 
 
   # Enable the GNOME Desktop Environment.
@@ -148,6 +149,7 @@
      flatpak
      file
      obs-studio
+     cava
   ];
 
   fonts.packages = with pkgs; [
@@ -166,6 +168,16 @@
     gc = "sudo nix-collect-garbage -d -v";
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
   };
+
+  # --------------APP SETTINGS---------------
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+
+  # --------------APP SETTINGS---------------
 
   # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
   services.undervolt = {
