@@ -207,7 +207,27 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+  
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Wajib buat Steam & Proton (32-bit games/libraries)
+
+    # Driver akselerasi Intel (VA-API & Vulkan)
+    extraPackages = with pkgs; [
+      intel-media-driver # Driver VA-API resmi Intel buat Gen 9+ (i5-8250U)
+      vulkan-validation-layers
+    ];
+    
+    # Versi 32-bit driver Intel biar Steam 32-bit rendering-nya jos
+    extraPackages32 = with pkgs; [
+      intel-media-driver
+    ];
+  };
+
+  # (Opsional) Nyalain GameMode biar CPU i5-8250U lu gak ketahan power saving pas main game
+  programs.gamemode.enable = true;
 
   # -----------------------------------------
 
