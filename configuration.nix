@@ -65,10 +65,10 @@
 
   # Enable the GNOME Desktop Environment.
   # services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.gnome.core-apps.enable = false;
-  services.gnome.core-developer-tools.enable = false;
-  services.gnome.games.enable = false;
+  #services.desktopManager.gnome.enable = false;
+  #services.gnome.core-apps.enable = false;
+  #services.gnome.core-developer-tools.enable = false;
+  #services.gnome.games.enable = false;
 
   environment.variables = {
      WLR_NO_HARDWARE_CURSORS = "1";
@@ -122,7 +122,7 @@
   };
 
   # programs.firefox.enable = true;
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
   programs.niri.enable = true;
   services.displayManager.ly.enable = true;
 
@@ -140,7 +140,7 @@
      steam
      thunar
      discord
-     kdePackages.dolphin
+     #kdePackages.dolphin
      niri
      fuzzel
      alacritty
@@ -148,7 +148,6 @@
      flatpak
      file
      obs-studio
-     steam
   ];
 
   fonts.packages = with pkgs; [
@@ -164,6 +163,7 @@
 
     rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
     #up = "sudo nixos-rebuild switch --upgrade --flake /etc/nixos#nix";
+    gc = "sudo nix-collect-garbage -d -v";
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
   };
 
