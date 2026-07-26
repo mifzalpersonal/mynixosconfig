@@ -142,7 +142,8 @@
      pipes
      lavat
      #------
-
+     
+     rustdesk
      brave
      kitty
      steam
@@ -270,7 +271,13 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lts;
+  services.scx.enable = true;
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50; # Pakai alokasi max 50% dari total RAM fisik kamu
+  };
 
   #{
   #  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
