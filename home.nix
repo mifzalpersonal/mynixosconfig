@@ -66,6 +66,7 @@
 
   gtk = {
   enable = true;
+  gtk4.theme = null;
   
   # Paksa GTK3 & GTK4 baca settingan Dark Mode
   gtk3.extraConfig = {
@@ -95,7 +96,7 @@
 # Bikin Qt app / xdg-desktop-portal ikut warna GTK
 qt = {
   enable = true;
-  platformTheme.name = "gtk";
+  platformTheme.name = "gtk3";
   style.name = "adwaita-dark";
 };
 

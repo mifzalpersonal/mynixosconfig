@@ -150,7 +150,7 @@
      # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
      tumbler                     # Engine preview gambar
      ffmpegthumbnailer           # Preview video
-     poppler_utils               # Preview PDF
+     poppler-utils               # Preview PDF
      file-roller                 # App GUI pendukung ekstraksi zip
 
      #larp
