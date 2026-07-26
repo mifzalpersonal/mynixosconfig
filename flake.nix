@@ -22,12 +22,21 @@
   outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs: {  
     nixosConfigurations = { nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
         specialArgs = { inherit inputs; };
-
         modules = [
           ./configuration.nix
           ./noctalia.nix
+
+          ({ pkgs, ... }:{
+            # Binary cache configuration to fetch pre-compiled kernels
+            # Apply the pinned overlay for cache alignment
+            nixpkgs.overlays = [
+              nix-cachyos-kernel.overlays.pinned
+            ];
+
+            # Set CachyOS Kernel
+            boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linux-cachyos-bore-x86_64-v3;
+          })
 
           
           home-manager.nixosModules.home-manager
