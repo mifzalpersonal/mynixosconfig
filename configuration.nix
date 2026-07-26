@@ -143,7 +143,7 @@
      lavat
      #------
      
-     rustdesk
+     
      brave
      kitty
      steam
@@ -169,6 +169,8 @@
      vscode
      go
      docker
+     winboat
+     rustdesk
     # --------
   ];
 
