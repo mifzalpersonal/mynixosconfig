@@ -240,6 +240,7 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+  programs.fish.enable = true;
 
   services.tumbler.enable = true;
   
@@ -282,6 +283,7 @@
   users.users.ciel = {
     isNormalUser = true;
     description = "ciel";
+    shell = pkgs.fish; # <-- TAMBAHKAN BARIS INI!
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker"];
   };
 
