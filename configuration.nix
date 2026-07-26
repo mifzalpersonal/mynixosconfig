@@ -170,7 +170,6 @@
      go
      docker
      winboat
-     rustdesk
     # --------
   ];
 
@@ -261,10 +260,11 @@
       "electron-40.10.5"
     ];
   };
-  
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings = {
     auto-optimise-store = true;
+    http2 = false;
   }; 
 
   nix.gc = {
@@ -279,7 +279,7 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lts;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   services.scx.enable = true;
   zramSwap = {
     enable = true;
