@@ -122,6 +122,16 @@
     };
   };
 
+
+  environment.sessionVariables = {
+    
+    # Paksa semua app GTK3/GTK4 pakai Dark Theme
+    GTK_THEME = "catppuccin-mocha-blue-standard";
+  
+    # Aktifkan fitur modern Thunar (thumbnail & preview)
+    GDK_BACKEND = "wayland,x11";
+  
+  };
   # programs.firefox.enable = true;
   #programs.hyprland.enable = true;
   programs.niri.enable = true;
@@ -133,6 +143,15 @@
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      neovim
+     xfce.thunar
+     xfce.thunar-archive-plugin  # Klik kanan -> Extract / Compress
+     xfce.thunar-volman          # Auto mount USB / Flashdisk
+     
+     # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
+     tumbler                     # Engine preview gambar
+     ffmpegthumbnailer           # Preview video
+     poppler_utils               # Preview PDF
+     file-roller                 # App GUI pendukung ekstraksi zip
 
      #larp
      btop
@@ -141,6 +160,8 @@
      tty-clock
      pipes
      lavat
+     eza
+     bat
      #------
      
      
@@ -158,6 +179,10 @@
      obs-studio
      cava
      xwayland-satellite #its for xxwayland so steam can run
+     bazaar
+     ollama
+     obsidian
+
 
     # devs thingy
      laravel
@@ -186,22 +211,26 @@
   };
   #--------------------------------
 
-
+  
   fonts.packages = with pkgs; [
      noto-fonts
      noto-fonts-cjk-sans       # Jurus anti kotak-kotak Jepang
      font-awesome              # Ikon widget Caelestia
      nerd-fonts.jetbrains-mono # Font terminal
      corefonts
+     nerd-fonts.fira-code
   ];
 
    environment.shellAliases = {
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-
     rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
-    #up = "sudo nixos-rebuild switch --upgrade --flake /etc/nixos#nix";
-    gc = "sudo nix-collect-garbage -d -v";
+    gc = "sudo nix-collect-garbage -d -v";  
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
+    ls = "eza --icons --group-directories-first";
+    ll = "eza -l --icons --group-directories-first";
+    tree = "eza --tree --icons";
+    cat = "bat";
+    roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober"
   };
 
   # --------------APP SETTINGS---------------
@@ -211,6 +240,8 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  services.tumbler.enable = true;
   
   hardware.graphics = {
     enable = true;
