@@ -266,11 +266,11 @@
 
 
   # --------------CACHY KERNEL-------------------
-  #nixpkgs.overlays = [
-  #  inputs.nix-cachyos-kernel.overlays.pinned
-  #];
+  nixpkgs.overlays = [
+    inputs.nix-cachyos-kernel.overlays.pinned
+  ];
 
-  #boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
   #nix.settings = {
   #  substituters = [ 
