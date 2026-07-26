@@ -12,8 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release"; 
-    #https://github.com/xddxdd/nix-cachyos-kernel
+    
 
 
   
@@ -27,12 +26,7 @@
           ./configuration.nix
           ./noctalia.nix
 
-          ({ pkgs, ... }:{
-            
-
-            # Set CachyOS Kernel
-            boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-bore-x86_64-v3;
-          })
+          
 
           
           home-manager.nixosModules.home-manager
