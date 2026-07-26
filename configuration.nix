@@ -130,6 +130,7 @@
   
     # Aktifkan fitur modern Thunar (thumbnail & preview)
     GDK_BACKEND = "wayland,x11";
+    XDG_CURRENT_DESKTOP = "niri";
   
   };
   # programs.firefox.enable = true;
@@ -143,9 +144,8 @@
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      neovim
-     xfce.thunar
-     xfce.thunar-archive-plugin  # Klik kanan -> Extract / Compress
-     xfce.thunar-volman          # Auto mount USB / Flashdisk
+     thunar-archive-plugin  # Klik kanan -> Extract / Compress
+     thunar-volman        # Auto mount USB / Flashdisk
      
      # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
      tumbler                     # Engine preview gambar
@@ -195,6 +195,7 @@
      go
      docker
      winboat
+     vscode-fhs
     # --------
   ];
 
@@ -259,6 +260,25 @@
       intel-media-driver
     ];
   };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      # Gunakan lib.mkForce untuk menimpa nilai default dari modul programs.niri
+      niri = {
+        default = lib.mkForce [ "gtk" "gnome" ];
+      };
+    };
+  };
+
+  
 
   # (Opsional) Nyalain GameMode biar CPU i5-8250U lu gak ketahan power saving pas main game
   programs.gamemode.enable = true;

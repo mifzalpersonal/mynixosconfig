@@ -100,6 +100,18 @@ qt = {
   style.name = "adwaita-dark";
 };
 
+xdg.userDirs = {
+  enable = true;
+  createDirectories = true; # Otomatis bikin folder kalau belum ada
+  download = "${config.home.homeDirectory}/Downloads";
+  pictures = "${config.home.homeDirectory}/Pictures";
+};
+
+xdg.configFile."user-dirs.conf" = {
+  text = "enabled=True";
+  force = true;
+};
+
 xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
 
   # Aktifkan modul internal Home Manager

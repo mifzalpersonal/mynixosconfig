@@ -26,6 +26,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup"; # <-- Tambahkan baris ini!
             
             home-manager.users.ciel = import ./home.nix;
           }
