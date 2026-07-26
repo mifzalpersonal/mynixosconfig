@@ -230,7 +230,7 @@
     ll = "eza -l --icons --group-directories-first";
     tree = "eza --tree --icons";
     cat = "bat";
-    roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober"
+    roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober";
   };
 
   # --------------APP SETTINGS---------------
