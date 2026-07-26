@@ -255,7 +255,13 @@
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker"];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-40.10.5"
+    ];
+  };
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings = {
     auto-optimise-store = true;

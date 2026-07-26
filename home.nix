@@ -41,6 +41,7 @@
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome-themes-extra;
+    enable = true;
   };
 
   xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
