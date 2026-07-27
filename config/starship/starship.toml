@@ -1,26 +1,32 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Cuma pakai 2 Tone utama: 
+# Tone 1 (Accent) = color3 (Kuning/Cream M3)
+# Tone 2 (Surface/Container) = color8 (Muted Surface M3)
+
 format = """
 [░▒▓](11)\
 $os\
-[](bg:9 fg:11)\
+[](bg:8 fg:11)\
 $directory\
-[](fg:9 bg:8)\
 $git_branch\
 $git_status\
-[](fg:8 bg:0)\
 $nodejs\
 $bun\
 $rust\
 $golang\
 $php\
-[](fg:0 bg:8)\
 $time\
 [ ](fg:8)\
 \n$character"""
 
+[os]
+style = "bg:11 fg:0"
+format = "[ $symbol ]($style)"
+disabled = false
+
 [directory]
-style = "fg:0 bg:9"
+style = "fg:15 bg:8"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -36,39 +42,34 @@ format = '[[($all_status$ahead_behind )](fg:11 bg:8)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:0"
-format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
+style = "bg:8"
+format = '[[ $symbol ($version) ](fg:11 bg:8)]($style)'
 
 [bun]
 symbol = ""
-style = "bg:0"
-format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
+style = "bg:8"
+format = '[[ $symbol ($version) ](fg:11 bg:8)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:0"
-format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
+style = "bg:8"
+format = '[[ $symbol ($version) ](fg:11 bg:8)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:0"
-format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
+style = "bg:8"
+format = '[[ $symbol ($version) ](fg:11 bg:8)]($style)'
 
 [php]
 symbol = ""
-style = "bg:0"
-format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
+style = "bg:8"
+format = '[[ $symbol ($version) ](fg:11 bg:8)]($style)'
 
 [time]
 disabled = false
 time_format = "%R"
 style = "bg:8"
 format = '[[  $time ](fg:15 bg:8)]($style)'
-
-[os]
-style = "bg:11 fg:0"
-format = "[ $symbol ]($style)"
-disabled = false
 
 [os.symbols]
 NixOS = ""     # Symbol NixOS
