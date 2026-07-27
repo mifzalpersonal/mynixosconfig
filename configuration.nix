@@ -196,6 +196,8 @@
      docker
      winboat
      vscode-fhs
+     python313Packages.pip
+     llama-cpp-vulkan
     # --------
   ];
 
