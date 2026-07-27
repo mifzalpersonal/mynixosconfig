@@ -357,6 +357,9 @@ window-rule {
     
     opacity 0.9          // Opacity saat tidak fokus
     draw-border-with-background false
+    background-effect {
+        blur true
+    }
 }
 
 binds {
