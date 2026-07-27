@@ -198,6 +198,7 @@
      vscode-fhs
      python313Packages.pip
      llama-cpp-vulkan
+     aider-chat-full
     # --------
   ];
 
@@ -290,6 +291,7 @@
   # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
   services.undervolt = {
     enable = true;
+    temp = 85;
     
     # Voltage Offset (dalam mV, pake angka negatif)
     coreOffset = -100;   # CPU Core
