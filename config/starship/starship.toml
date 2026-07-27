@@ -1,72 +1,72 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[░▒▓](blue)\
+[░▒▓](11)\
 $os\
-[](bg:cyan fg:blue)\
+[](bg:9 fg:11)\
 $directory\
-[](fg:cyan bg:bright-black)\
+[](fg:9 bg:8)\
 $git_branch\
 $git_status\
-[](fg:bright-black bg:black)\
+[](fg:8 bg:0)\
 $nodejs\
 $bun\
 $rust\
 $golang\
 $php\
-[](fg:black bg:bright-black)\
+[](fg:0 bg:8)\
 $time\
-[ ](fg:bright-black)\
+[ ](fg:8)\
 \n$character"""
 
 [directory]
-style = "fg:black bg:cyan"
+style = "fg:0 bg:9"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:bright-black"
-format = '[[ $symbol $branch ](fg:cyan bg:bright-black)]($style)'
+style = "bg:8"
+format = '[[ $symbol $branch ](fg:11 bg:8)]($style)'
 
 [git_status]
-style = "bg:bright-black"
-format = '[[($all_status$ahead_behind )](fg:cyan bg:bright-black)]($style)'
+style = "bg:8"
+format = '[[($all_status$ahead_behind )](fg:11 bg:8)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:black"
-format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
+style = "bg:0"
+format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
 
 [bun]
 symbol = ""
-style = "bg:black"
-format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
+style = "bg:0"
+format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:black"
-format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
+style = "bg:0"
+format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:black"
-format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
+style = "bg:0"
+format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
 
 [php]
 symbol = ""
-style = "bg:black"
-format = '[[ $symbol ($version) ](fg:blue bg:black)]($style)'
+style = "bg:0"
+format = '[[ $symbol ($version) ](fg:9 bg:0)]($style)'
 
 [time]
 disabled = false
 time_format = "%R"
-style = "bg:bright-black"
-format = '[[  $time ](fg:white bg:bright-black)]($style)'
+style = "bg:8"
+format = '[[  $time ](fg:15 bg:8)]($style)'
 
 [os]
-style = "bg:blue fg:black"
+style = "bg:11 fg:0"
 format = "[ $symbol ]($style)"
 disabled = false
 
