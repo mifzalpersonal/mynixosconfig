@@ -37,7 +37,7 @@
     # These settings are written to ~/.config/kitty/kitty.conf by Home Manager
     # Noctalia will NOT overwrite these because we are not letting it manage the main file
     settings = {
-      background_opacity = "0.64";
+      background_opacity = "0.75";
       hide_window_decorations = "yes";
       dynamic_background_opacity = "yes"; # Required for opacity to work
       font_size = 12;
