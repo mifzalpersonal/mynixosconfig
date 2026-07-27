@@ -199,6 +199,8 @@
      python313Packages.pip
      llama-cpp-vulkan
      aider-chat-full
+     php84
+     php84Packages.composer
     # --------
   ];
 
@@ -244,6 +246,13 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  # Aktifkan Gamescope
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true; # Memberi prioritas penjadwalan CPU/process ke gamescope
+  };
+
   programs.fish.enable = true;
 
   services.tumbler.enable = true;
