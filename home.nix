@@ -104,7 +104,10 @@ xdg.configFile."user-dirs.conf" = {
   force = true;
 };
 
-xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
+#xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
+xdg.configFile."fastfetch/config.jsonc".source = ./config/fastfetch/config.jsonc;
+xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
+xdg.configFile."niri/config.kdl".source = ./config/niri/config.kdl;
 
   # Aktifkan modul internal Home Manager
 programs.home-manager.enable = true;
