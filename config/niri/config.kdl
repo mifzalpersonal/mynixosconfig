@@ -356,7 +356,6 @@ window-rule {
     match app-id="kitty"
     
     opacity 0.9          // Opacity saat tidak fokus
-    active-opacity 0.9   // Opacity saat fokus (tetap transparan!)
 }
 
 binds {
