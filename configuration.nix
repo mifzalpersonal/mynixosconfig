@@ -26,7 +26,7 @@
 
   hardware.bluetooth = {
   enable = true;
-  powerOnBoot = true;
+  powerOnBoot = false;
   settings = {
     General = {
       # Shows battery charge of connected devices on supported
@@ -45,6 +45,35 @@
       };
     };
   };
+
+  #----------------OPTIMIZATIONNNNN-----------------------------
+  boot.kernel.sysctl = {
+    # Tells kernel to swap aggressively to zRAM before touching SSD
+    "vm.swappiness" = 180;
+    # Mandatory for zRAM: processes 1 page (4KB) at a time instead of 16KB clusters
+    "vm.page-cluster" = 0;
+    # Prevents unnecessary page cache dropping when swapping
+    "vm.vfs_cache_pressure" = 100;
+
+    # MGLRU Optimization (Pemindaian memori presisi)
+    "vm.lru_gen_config" = 3;
+
+    # BBR TCP Congestion Control
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+
+  };
+  
+  # 1. Pindahkan /tmp ke RAM (tmpfs) dengan limit 30%
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "30%";
+  };
+
+  # 2. Load Kernel Module untuk BBR
+  boot.kernelModules = [ "tcp_bbr" ];
+  #----------------OPTIMIZATIONNNNN-----------------------------
+
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
