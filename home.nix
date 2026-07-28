@@ -50,6 +50,18 @@
     '';
   };
 
+  # Integrasi Zoxide (pengganti 'cd' yang cerdas)
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  # Integrasi FZF (fuzzy finder buat nyari file/history super cepat)
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome-themes-extra;
@@ -95,6 +107,7 @@ qt = {
 xdg.userDirs = {
   enable = true;
   createDirectories = true; # Otomatis bikin folder kalau belum ada
+  setSessionVariables = false;
   download = "${config.home.homeDirectory}/Downloads";
   pictures = "${config.home.homeDirectory}/Pictures";
 };

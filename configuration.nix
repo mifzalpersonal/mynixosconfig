@@ -63,7 +63,7 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
 
   };
-  
+
   # 1. Pindahkan /tmp ke RAM (tmpfs) dengan limit 30%
   boot.tmp = {
     useTmpfs = true;
@@ -266,6 +266,7 @@
     ll = "eza -l --icons --group-directories-first";
     tree = "eza --tree --icons";
     cat = "bat";
+    cd = "z";
     roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober";
   };
 
