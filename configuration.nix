@@ -212,6 +212,7 @@
      bazaar
      ollama
      obsidian
+     ani-cli
 
 
     # devs thingy
