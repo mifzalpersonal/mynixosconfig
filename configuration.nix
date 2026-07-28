@@ -281,6 +281,8 @@
    environment.shellAliases = {
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
+    rbf = "sudo nixos-rebuild switch --fast --flake /etc/nixos#nix";
+    rbo = "sudo nixos-rebuild switch --fast --option substitute false --flake /etc/nixos#nix";
     gc = "sudo nix-collect-garbage -d -v";  
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
     ls = "eza --icons --group-directories-first";
@@ -388,14 +390,24 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings = {
-    auto-optimise-store = true;
-    http2 = false;
+    eval-cache = true;
+    #Otomatis bersihkan file installer corrupt / setengah download
+    keep-outputs = false;
+    keep-derivations = false;
+
+    http-connections = 50; #50 orang kerja free labor
+    max-substitution-jobs = 128;
   }; 
 
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
+  };
+  
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ]; # Menjalankan hardlink deduplication seminggu sekali di background
   };
 
 
