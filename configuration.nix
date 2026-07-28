@@ -19,6 +19,7 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  services.cloudflare-warp.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
