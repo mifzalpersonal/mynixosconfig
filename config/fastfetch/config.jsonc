@@ -37,6 +37,12 @@
       "key": "│ {#34}{icon} distro  {#keys}│",
       "type": "os",
     },
+
+    {
+      "key": "│ {#34} packages  {#keys}│",
+      "type": "packages",
+    },
+
     {
       "key": "│ {#34} kernel  {#keys}│",
       "type": "kernel",

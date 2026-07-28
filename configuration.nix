@@ -13,6 +13,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
     "quiet"                          # Sembunyikan pesan booting bawaan
     "splash"                         # Tampilan booting bersih
@@ -249,10 +250,21 @@
     package = pkgs.mariadb;
   };
 
+  # 2. Matikan service MySQL dari startup boot
+  systemd.services.mysql.wantedBy = lib.mkForce [ ];
+  # 3. Aktifkan socket listener MySQL
+  systemd.sockets.mysql = {
+    wantedBy = [ "sockets.target" ];
+    socketConfig = {
+      ListenStream = "/run/mysqld/mysqld.sock";
+    };
+  };
+
   services.flatpak.enable = true;
 
   virtualisation.docker = {
     enable = true;
+    enableOnBoot = false; # Biar gak ngerem booting
   };
   #--------------------------------
 
@@ -360,6 +372,11 @@
     description = "ciel";
     shell = pkgs.fish; # <-- TAMBAHKAN BARIS INI!
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker"];
+  };
+
+  systemd.services."home-manager-ciel" = {
+    wantedBy = lib.mkForce [ "multi-user.target" ];
+    before = lib.mkForce [ ];
   };
 
   nixpkgs.config = {
