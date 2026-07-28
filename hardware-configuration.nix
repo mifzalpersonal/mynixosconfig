@@ -16,6 +16,12 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/977de78c-4053-468f-aea3-d43919ea8e65";
       fsType = "btrfs";
+      options = [ 
+      "noatime"           # Wajib banget di HDD biar jarum gak cape
+      "compress=zstd:1"    # Mengompresi data biar beban baca HDD makin sedikit
+      "space_cache=v2" 
+      "autodefrag"         # Khusus HDD! Btrfs bakal otomatis cegah fragmentasi file kecil di background
+    ];
     };
 
   fileSystems."/boot" =

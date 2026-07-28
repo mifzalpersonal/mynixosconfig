@@ -13,6 +13,13 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [
+    "quiet"                          # Sembunyikan pesan booting bawaan
+    "splash"                         # Tampilan booting bersih
+    "loglevel=3"                     # Cuma tampilkan log error penting
+    "rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
+    "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
+  ];
 
   networking.hostName = "nix"; # Define your hostname.
 
@@ -213,6 +220,7 @@
      ollama
      obsidian
      ani-cli
+     ncdu
 
 
     # devs thingy
@@ -294,6 +302,8 @@
     enable32Bit = true; # Wajib buat Steam & Proton (32-bit games/libraries)
 
     # Driver akselerasi Intel (VA-API & Vulkan)
+    
+
     extraPackages = with pkgs; [
       intel-media-driver # Driver VA-API resmi Intel buat Gen 9+ (i5-8250U)
       vulkan-validation-layers
