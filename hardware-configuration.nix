@@ -8,31 +8,37 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "uas" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "uas" "usb_storage" "sd_mod" "thinkpad_acpi" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModprobeConfig = ''
+    options thinkpad_acpi fan_control=1
+  '';
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/977de78c-4053-468f-aea3-d43919ea8e65";
+    { device = "/dev/disk/by-uuid/25fb2851-0a77-49fe-939c-7f91b63dad5b";
       fsType = "btrfs";
-      options = [ 
-      "noatime"           # Wajib banget di HDD biar jarum gak cape
-      "compress=zstd:1"    # Mengompresi data biar beban baca HDD makin sedikit
-      "space_cache=v2" 
-      "autodefrag"         # Khusus HDD! Btrfs bakal otomatis cegah fragmentasi file kecil di background
-    ];
+      options = [
+	"noatime"
+	"compress=zstd:1"
+	"space_cache=v2"
+
+  # --- TAMBAHAN BIAR MAKIN GACOR ---
+  "ssd"             # Maksa Btrfs optimasi alokasi blok khusus SSD (bukan HDD)
+  "discard=async"   # TRIM otomatis di background tanpa bikin I/O lag/lagging
+  "commit=120"      # Nunda flush cache dari RAM ke disk tiap 120 detik (bawaannya 30 detik)
+  "clear_cache"     # Opsional: membersihkan/rebuild cache jika ada sisa cache lama
+      ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1118-F10F";
+    { device = "/dev/disk/by-uuid/9D66-6620";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/1984a7dd-6c89-4f78-a1b3-5bd94e77dca4"; }
-    ];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

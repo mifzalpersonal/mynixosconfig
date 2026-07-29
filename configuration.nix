@@ -157,8 +157,29 @@
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
       START_CHARGE_THRESH_BAT1 = 60;
       STOP_CHARGE_THRESH_BAT1 = 80;
+
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      
+      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_AC = 1;
+
+      # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
     };
   };
+  
+  services.thinkfan = {
+    enable = true;
+    levels = [
+      [0 0 53]             # Fan OFF (0 RPM) kalau suhu di bawah 53°C
+      [1 50 62]            # Fan Level 1 (~1200 RPM, hening) kalau suhu 50-62°C
+      [2 58 68]            # Fan Level 2 (~2000 RPM) kalau suhu 58-68°C
+      ["level auto" 65 80] # Kembalikan ke BIOS kalau udah di atas 65°C
+    ];
+  };
+
 
 
   environment.sessionVariables = {
@@ -200,6 +221,7 @@
      lavat
      eza
      bat
+     s-tui
      #------
      
      
