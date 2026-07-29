@@ -250,15 +250,8 @@
     package = pkgs.mariadb;
   };
 
-  # 2. Matikan service MySQL dari startup boot
-  systemd.services.mysql.wantedBy = lib.mkForce [ ];
-  # 3. Aktifkan socket listener MySQL
-  systemd.sockets.mysql = {
-    wantedBy = [ "sockets.target" ];
-    socketConfig = {
-      ListenStream = "/run/mysqld/mysqld.sock";
-    };
-  };
+  
+  
 
   services.flatpak.enable = true;
 
@@ -281,8 +274,8 @@
    environment.shellAliases = {
     gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
-    rbf = "sudo nixos-rebuild switch --fast --flake /etc/nixos#nix";
-    rbo = "sudo nixos-rebuild switch --fast --option substitute false --flake /etc/nixos#nix";
+    rbf = "sudo nixos-rebuild switch --no-reexec --flake /etc/nixos#nix";
+    rbo = "sudo nixos-rebuild switch --no-reexec --option substitute false --flake /etc/nixos#nix";
     gc = "sudo nix-collect-garbage -d -v";  
     up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
     ls = "eza --icons --group-directories-first";
@@ -365,8 +358,15 @@
     
     useTimer = true;
     # Pengaturan Power Limit (Optional, biar makin adem)
-    # packagePowerLimitP1 = 25; # Short term boost (Watts)
-    # packagePowerLimitP2 = 15; # Long term sustained limit (Watts)
+    p1 = {
+      limit = 20;
+      window = 28;
+    }; 
+
+    p2 = { 
+      limit = 30;
+      window = 28;
+    }; 
   };
   
   users.users.ciel = {
