@@ -24,6 +24,11 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting "" # Matikan pesan greeting pembuka bawaan Fish
+
+      set random_img (random choice /etc/nixos/genshin-chibis/*.png)
+      if test -n "$random_img"
+          kitty +kitten icat --place 20x20@137x0 "$random_img"
+      end
     '';
   };
 
