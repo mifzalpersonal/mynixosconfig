@@ -27,7 +27,9 @@
 
       set random_img (random choice /etc/nixos/genshin-chibis/*.png)
       if test -n "$random_img"
-          kitty +kitten icat --place 20x20@137x0 "$random_img"
+          kitty +kitten icat --place 20x20@0x0 "$random_img"
+
+          echo -e "\n\n\n\n\n\n\n\n\n"
       end
     '';
   };
