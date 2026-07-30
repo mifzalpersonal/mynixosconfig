@@ -26,6 +26,19 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+  networking.networkmanager.settings = {
+    dhcp = {
+      send-hostname = true;
+    };
+
+    connection = {
+      "ipv4.dhcp-send-hostname" = "iPhone";
+      "ipv6.dhcp-send-hostname" = "iPhone";
+      "ethernet.cloned-mac-address" = "A4:D1:8C:11:22:33";
+      "wifi.cloned-mac-address" = "A4:D1:8C:44:55:66";
+    };
+  };
+
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   services.cloudflare-warp.enable = true;
 
