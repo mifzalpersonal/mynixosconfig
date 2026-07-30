@@ -27,9 +27,9 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
   networking.networkmanager.settings = {
-    dhcp = {
-      send-hostname = true;
-    };
+    # dhcp = {
+    #   send-hostname = true;
+    # };
 
     connection = {
       "ipv4.dhcp-send-hostname" = "iPhone";
