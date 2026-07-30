@@ -180,7 +180,11 @@
     ];
   };
 
+  # Aktifkan UDisks2 (Backend buat kelola/mount disk tanpa root)
+  services.udisks2.enable = true;
 
+  # Aktifkan GVfs (Wajib buat Thunar biar sidebar-nya bisa baca disk, trash, dll)
+  services.gvfs.enable = true;
 
   environment.sessionVariables = {
     
@@ -244,6 +248,7 @@
      obsidian
      ani-cli
      ncdu
+     img2pdf
 
 
     # devs thingy
