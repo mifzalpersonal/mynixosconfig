@@ -321,6 +321,7 @@
      nerd-fonts.jetbrains-mono # Font terminal
      corefonts
      nerd-fonts.fira-code
+     monocraft
   ];
 
    environment.shellAliases = {
@@ -337,6 +338,7 @@
     cd = "z";
     roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober";
     kipas = "cat /proc/acpi/ibm/fan";
+    ghidrax11 = "GDK_BACKEND=x11 _JAVA_AWT_WM_NONREPARENTING=1 ghidra";
   };
 
   # --------------APP SETTINGS---------------

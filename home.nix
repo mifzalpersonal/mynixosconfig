@@ -7,6 +7,7 @@
   # Sinkron dengan stateVersion di configuration.nix lu
   home.stateVersion = "25.11"; 
 
+  fonts.fontconfig.enable = true;
   # Tempat naruh aplikasi khusus user lu nanti
   home.packages = with pkgs; [
   ];
@@ -41,6 +42,9 @@
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
+    #font = {
+    #    name = "Monocraft";
+    #};
     # These settings are written to ~/.config/kitty/kitty.conf by Home Manager
     # Noctalia will NOT overwrite these because we are not letting it manage the main file
     settings = {
@@ -49,6 +53,8 @@
       dynamic_background_opacity = "yes"; # Required for opacity to work
       font_size = 12;
       confirm_os_window_close = 0;
+      disable_ligatures = "never";
+      
     };
 
     extraConfig = ''
@@ -56,6 +62,7 @@
       include ~/.config/kitty/themes/noctalia.conf
     '';
   };
+  
 
   # Integrasi Zoxide (pengganti 'cd' yang cerdas)
   programs.zoxide = {
@@ -69,14 +76,13 @@
     enableFishIntegration = true;
   };
 
-    
-
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome-themes-extra;
     enable = true;
   };
 
+  # ------------------------ SLOPPPPPPPPPPPP -------------------
   gtk = {
   enable = true;
   gtk4.theme = null;
@@ -125,6 +131,18 @@ xdg.configFile."user-dirs.conf" = {
   text = "enabled=True";
   force = true;
 };
+
+#------------------SLOPPPPPPPPPPPPPPPP----------------------
+
+home.sessionVariables = {
+    # Memaksa SEMUA aplikasi Java Swing/AWT (Ghidra, Burp, NetBeans, dll) 
+    # pake kompatibilitas XWayland tanpa bikin window transparan/blank.
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    
+    # Memaksa toolkit GTK tua (yang belum support Wayland) otomatis lari ke X11
+    # Tanpa merusak aplikasi GTK4 modern yang udah native Wayland.
+    GDK_BACKEND = "wayland,x11"; 
+  };
 
 #xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
 xdg.configFile."fastfetch/config.jsonc".source = ./config/fastfetch/config.jsonc;

@@ -7,8 +7,8 @@
   # LSPs dan tool pendukung
   environment.systemPackages = with pkgs; [
     helix
-    nil                           # Nix LSP
-    nixfmt-rfc-style              # Nix Formatter
+    nil                            # Nix LSP
+    nixfmt                         # Nix Formatter
     vscode-langservers-extracted   # HTML/CSS/JSON/ESLint
     typescript-language-server
     tailwindcss-language-server
