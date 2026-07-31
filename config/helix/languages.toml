@@ -1,0 +1,71 @@
+# -----------------------------------------------------------------------------
+# LARAVEL & PHP STACK
+# -----------------------------------------------------------------------------
+
+# File Template Blade (.blade.php)
+[[language]]
+name = "blade"
+scope = "source.blade"
+injection-regex = "blade"
+file-types = ["blade.php"]
+roots = ["composer.json", "package.json"]
+auto-format = true
+formatter = { command = "blade-formatter", args = ["--stdin"] }
+language-servers = ["html-language-server", "tailwindcss-language-server", "intelephense"]
+
+# PHP Standard (.php)
+[[language]]
+name = "php"
+auto-format = true
+roots = ["composer.json"]
+language-servers = ["intelephense"]
+
+# -----------------------------------------------------------------------------
+# WEB & FRONTEND STACK
+# -----------------------------------------------------------------------------
+
+# HTML
+[[language]]
+name = "html"
+auto-format = true
+language-servers = ["html-language-server", "tailwindcss-language-server"]
+
+# CSS
+[[language]]
+name = "css"
+auto-format = true
+language-servers = ["css-language-server", "tailwindcss-language-server"]
+
+# TypeScript / JavaScript
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = ["typescript-language-server", "tailwindcss-language-server"]
+
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = ["typescript-language-server", "tailwindcss-language-server"]
+
+# -----------------------------------------------------------------------------
+# NIX & CONFIGURATION STACK
+# -----------------------------------------------------------------------------
+
+# Nix
+[[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixfmt" }
+language-servers = ["nil"]
+
+# YAML
+[[language]]
+name = "yaml"
+auto-format = true
+language-servers = ["yaml-language-server"]
+
+# Bash / Shell Script
+[[language]]
+name = "bash"
+auto-format = true
+language-servers = ["bash-language-server"]

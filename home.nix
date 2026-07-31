@@ -69,6 +69,8 @@
     enableFishIntegration = true;
   };
 
+    
+
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome-themes-extra;
@@ -128,6 +130,8 @@ xdg.configFile."user-dirs.conf" = {
 xdg.configFile."fastfetch/config.jsonc".source = ./config/fastfetch/config.jsonc;
 xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
 xdg.configFile."niri/config.kdl".source = ./config/niri/config.kdl;
+xdg.configFile."helix/config.toml".source = ./config/helix/config.toml;
+xdg.configFile."helix/languages.toml".source = ./config/helix/languages.toml;
 
   # Aktifkan modul internal Home Manager
 programs.home-manager.enable = true;

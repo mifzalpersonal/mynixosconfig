@@ -8,6 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./helix.nix
+      ./cysec.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -26,18 +28,19 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
-  networking.networkmanager.settings = {
+  #networking.networkmanager.settings = {
+    
     # dhcp = {
     #   send-hostname = true;
     # };
 
-    connection = {
-      "ipv4.dhcp-send-hostname" = "iPhone";
-      "ipv6.dhcp-send-hostname" = "iPhone";
-      "ethernet.cloned-mac-address" = "A4:D1:8C:11:22:33";
-      "wifi.cloned-mac-address" = "A4:D1:8C:44:55:66";
-    };
-  };
+    # connection = {
+    #   "ipv4.dhcp-send-hostname" = "iPhone";
+    #   "ipv6.dhcp-send-hostname" = "iPhone";
+    #   "ethernet.cloned-mac-address" = "A4:D1:8C:11:22:33";
+    #   "wifi.cloned-mac-address" = "A4:D1:8C:44:55:66";
+    # };
+  #};
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   services.cloudflare-warp.enable = true;
@@ -172,7 +175,7 @@
       START_CHARGE_THRESH_BAT1 = 70;
       STOP_CHARGE_THRESH_BAT1 = 80;
 
-      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # Atau powersave
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
       CPU_BOOST_ON_BAT = 0;
@@ -187,15 +190,15 @@
   services.thinkfan = {
     enable = true;
     levels = [
-      [0 0 57]              # Fan OFF (0 RPM) sampai 57°C -> Bikin irit baterai pas idle
-      [1 46 68]             # Level 1 (~1200 RPM): Begitu nyala, ditahan luas dari 50°C - 68°C!
-      [2 58 74]             # Level 2 (~2000 RPM): Baru naik kalau > 68°C
-      [4 66 80]             # Level 4 (~3000 RPM): Baru naik kalau > 74°C
-      [6 72 84]             # Level 6 (~3500 RPM): Emergency > 80°C
-      ["level auto" 82 100]
+      #[0 0 57]              # Fan OFF (0 RPM) sampai 57°C -> Bikin irit baterai pas idle
+      #[2 46 68]             # Level 1 (~1200 RPM): Begitu nyala, ditahan luas dari 50°C - 68°C!
+      #[3 58 74]             # Level 2 (~2000 RPM): Baru naik kalau > 68°C
+      #[4 66 80]             # Level 4 (~3000 RPM): Baru naik kalau > 74°C
+      #[6 72 84]             # Level 6 (~3500 RPM): Emergency > 80°C
+      #["level auto" 82 100]
 
-      #[0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
-      #["level auto" 48 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
+      [0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
+      ["level auto" 47 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
     ];
   };
 
@@ -289,6 +292,8 @@
      aider-chat-full
      php84
      php84Packages.composer
+     tmux
+     helix
     # --------
   ];
 
@@ -298,7 +303,6 @@
     package = pkgs.mariadb;
   };
 
-  
   
 
   services.flatpak.enable = true;
@@ -332,6 +336,7 @@
     cat = "bat";
     cd = "z";
     roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober";
+    kipas = "cat /proc/acpi/ibm/fan";
   };
 
   # --------------APP SETTINGS---------------
