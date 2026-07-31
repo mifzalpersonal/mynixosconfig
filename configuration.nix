@@ -187,8 +187,15 @@
   services.thinkfan = {
     enable = true;
     levels = [
-      [0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
-      ["level auto" 46 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
+      [0 0 57]              # Fan OFF (0 RPM) sampai 57°C -> Bikin irit baterai pas idle
+      [1 46 68]             # Level 1 (~1200 RPM): Begitu nyala, ditahan luas dari 50°C - 68°C!
+      [2 58 74]             # Level 2 (~2000 RPM): Baru naik kalau > 68°C
+      [4 66 80]             # Level 4 (~3000 RPM): Baru naik kalau > 74°C
+      [6 72 84]             # Level 6 (~3500 RPM): Emergency > 80°C
+      ["level auto" 82 100]
+
+      #[0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
+      #["level auto" 48 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
     ];
   };
 
