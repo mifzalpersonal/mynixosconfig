@@ -172,7 +172,7 @@
       START_CHARGE_THRESH_BAT1 = 70;
       STOP_CHARGE_THRESH_BAT1 = 80;
 
-      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
+      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # Atau powersave
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
       CPU_BOOST_ON_BAT = 0;
@@ -187,12 +187,8 @@
   services.thinkfan = {
     enable = true;
     levels = [
-      [0 0 53]             # Fan OFF (0 RPM) kalau di bawah 53°C (tetap hening pas idle)
-      [1 48 55]            # Level 1 (~1200 RPM) 
-      [2 52 63]            # Level 2 (~2000 RPM)
-      [4 57 67]            # Level 4 (~3000 RPM)
-      [6 63 78]            # Level 6 (~3800 RPM) -> Batas atas disesuaikan ke 78°C
-      ["level auto" 75 100] # Kembalikan ke BIOS kalau udah di atas 75°C
+      [0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
+      ["level auto" 46 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
     ];
   };
 
