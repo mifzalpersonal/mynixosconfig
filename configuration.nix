@@ -187,10 +187,12 @@
   services.thinkfan = {
     enable = true;
     levels = [
-      [0 0 53]             # Fan OFF (0 RPM) kalau suhu di bawah 53°C
-      [1 50 62]            # Fan Level 1 (~1200 RPM, hening) kalau suhu 50-62°C
-      [2 58 68]            # Fan Level 2 (~2000 RPM) kalau suhu 58-68°C
-      ["level auto" 65 80] # Kembalikan ke BIOS kalau udah di atas 65°C
+      [0 0 53]             # Fan OFF (0 RPM) kalau di bawah 53°C (tetap hening pas idle)
+      [1 48 55]            # Level 1 (~1200 RPM) 
+      [2 52 63]            # Level 2 (~2000 RPM)
+      [4 57 67]            # Level 4 (~3000 RPM)
+      [6 63 78]            # Level 6 (~3800 RPM) -> Batas atas disesuaikan ke 78°C
+      ["level auto" 75 100] # Kembalikan ke BIOS kalau udah di atas 75°C
     ];
   };
 
