@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./helix.nix
       ./cysec.nix
+      ./session.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -267,23 +268,6 @@
   
   programs.niri.enable = true;
   services.displayManager.ly.enable = true;
-  
-  # Fix: Bungkus dengan writeTextFile biar dibaca sebagai package session valid
-  services.displayManager.sessionPackages = [
-    (pkgs.writeTextFile {
-      name = "winboat-kiosk-session";
-      destination = "/share/wayland-sessions/winboat-kiosk.desktop";
-      text = ''
-        [Desktop Entry]
-        Name=Winboat Kiosk (labwc)
-        Comment=Lightweight Windows VM Kiosk Session with Emergency Terminal
-        Exec=${pkgs.labwc}/bin/labwc -e "winboat --fullscreen"
-        Type=Application
-        DesktopNames=labwc
-      '';
-    })
-  ];
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -352,7 +336,7 @@
     adwaita-icon-theme # <-- Tambahkan ini buat fallback icon Wayland
 
     #project iwnboat
-    labwc
+    #labwc
 
     # devs thingy
      laravel
