@@ -23,12 +23,53 @@
     "rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
     "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
 
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
+
     "i915.enable_guc=3"   # Enable GuC submission & HuC loading (Offload scheduler ke GPU)
     "i915.enable_psr=0"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
     "i915.fastboot=1"     # Seamless boot transition
 
     "i915.modeset=1" # Memaksa driver VGA Intel buat langsung nge-handle layar sejak di dalam initrd.
   ];
+
+  #------------------THE START OF PLYMOMUHT---------------------
+  boot.plymouth = {
+    enable = true;
+    theme = "catppuccin-macchiato"; # Pilihan: catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+    
+    themePackages = [
+      (pkgs.catppuccin-plymouth.override {
+        variant = "macchiato"; # Samakan varian warnanya di sini
+      })
+    ];
+  };
+
+  # 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.initrd.kernelModules = [ "i915" ];
+  boot.loader.timeout = 0;
+
+  #------------------THE END OF PLYMOMUHT---------------------
+  
+
+  #------------------CHANGING SDDM TO CATPPUCCINO-------------
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true; # Wajib enable Wayland karena kamu pake Niri!
+    theme = "catppuccin-macchiato"; # Pilihan: latte, frappe, macchiato, mocha
+    
+    settings = {
+      Theme = {
+        CursorTheme = "Bibata-Modern-Classic"; # (Opsional) Sesuaikan kursor kamu
+      };
+    };
+  };
+
+  #-------------------CHANGING SDDM TO CATPPUCCINO------------
+
 
   networking.hostName = "HIKVISION-NVR"; # Define your hostname.
 
@@ -235,7 +276,7 @@
   # programs.firefox.enable = true;
   #programs.hyprland.enable = true;
   programs.niri.enable = true;
-  services.displayManager.ly.enable = true;
+  #services.displayManager.ly.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -315,6 +356,15 @@
      tmux
      helix
     # --------
+
+
+    #SDDM CATPPUCCINO
+    (catppuccin-sddm.override {
+      flavor = "macchiato"; # Samakan dengan Plymouth kamu (macchiato/mocha/frappe/latte)
+      font = "Noto Sans";
+      fontSize = "9";
+      # background = "/path/to/your/wallpaper.png"; # Kalau mau pake custom wallpaper
+    })
   ];
 
   #-------------DEVSSS-------------
