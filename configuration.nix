@@ -22,9 +22,15 @@
     "loglevel=3"                     # Cuma tampilkan log error penting
     "rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
     "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
+
+    "i915.enable_guc=3"   # Enable GuC submission & HuC loading (Offload scheduler ke GPU)
+    "i915.enable_psr=0"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
+    "i915.fastboot=1"     # Seamless boot transition
+
+    "i915.modeset=1" # Memaksa driver VGA Intel buat langsung nge-handle layar sejak di dalam initrd.
   ];
 
-  networking.hostName = "nix"; # Define your hostname.
+  networking.hostName = "HIKVISION-NVR"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -72,6 +78,12 @@
 
   #----------------OPTIMIZATIONNNNN-----------------------------
   boot.kernel.sysctl = {
+
+    # TTL 65 + BBR Kernel Optimization
+    "net.ipv4.ip_default_ttl" = 65;
+    "net.ipv6.conf.all.hop_limit" = 65;
+
+
     # Tells kernel to swap aggressively to zRAM before touching SSD
     "vm.swappiness" = 180;
     # Mandatory for zRAM: processes 1 page (4KB) at a time instead of 16KB clusters
@@ -79,8 +91,10 @@
     # Prevents unnecessary page cache dropping when swapping
     "vm.vfs_cache_pressure" = 100;
 
+
     # MGLRU Optimization (Pemindaian memori presisi)
     "vm.lru_gen_config" = 3;
+
 
     # BBR TCP Congestion Control
     "net.core.default_qdisc" = "fq";
