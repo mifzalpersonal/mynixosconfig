@@ -169,6 +169,8 @@
   environment.variables = {
      WLR_NO_HARDWARE_CURSORS = "1";
      GSK_RENDERER = "gl";
+     XCURSOR_THEME = "Bibata";
+     XCURSOR_SIZE = "24";
   };
 
   # Configure keymap in X11

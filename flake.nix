@@ -28,7 +28,7 @@
 
             settings = {
               Theme = {
-                CursorTheme = "Adwaita-Modern-Classic"; # Atau "Adwaita" / "breeze_cursors"
+                CursorTheme = "Bibata-Modern-Classic"; # Atau "Adwaita" / "breeze_cursors"
                 CursorSize = "24";
               };
               General = {
@@ -39,6 +39,8 @@
             };
           };
 
+          services.displayManager.defaultSession = "niri";
+          
           programs.qylock = {
             enable = true;
             theme = "osu";          # any directory name under themes/
