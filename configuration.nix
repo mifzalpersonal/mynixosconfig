@@ -49,26 +49,12 @@
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.initrd.kernelModules = [ "i915" ];
-  boot.loader.timeout = 0;
 
   #------------------THE END OF PLYMOMUHT---------------------
+
   
 
-  #------------------CHANGING SDDM TO CATPPUCCINO-------------
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true; # Wajib enable Wayland karena kamu pake Niri!
-    theme = "catppuccin-macchiato"; # Pilihan: latte, frappe, macchiato, mocha
-    
-    settings = {
-      Theme = {
-        CursorTheme = "Bibata-Modern-Classic"; # (Opsional) Sesuaikan kursor kamu
-      };
-    };
-  };
-
-  #-------------------CHANGING SDDM TO CATPPUCCINO------------
+  
 
 
   networking.hostName = "HIKVISION-NVR"; # Define your hostname.
@@ -335,6 +321,13 @@
      vulkan-tools
      libva-utils
 
+     #lib
+     mpv
+     aria2
+     ffmpeg
+
+    #cursor
+    bibata-cursors
 
     # devs thingy
      laravel
@@ -356,15 +349,6 @@
      tmux
      helix
     # --------
-
-
-    #SDDM CATPPUCCINO
-    (catppuccin-sddm.override {
-      flavor = "macchiato"; # Samakan dengan Plymouth kamu (macchiato/mocha/frappe/latte)
-      font = "Noto Sans";
-      fontSize = "9";
-      # background = "/path/to/your/wallpaper.png"; # Kalau mau pake custom wallpaper
-    })
   ];
 
   #-------------DEVSSS-------------
