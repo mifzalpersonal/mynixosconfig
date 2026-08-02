@@ -267,15 +267,21 @@
   
   programs.niri.enable = true;
   services.displayManager.ly.enable = true;
+  
+  # Fix: Bungkus dengan writeTextFile biar dibaca sebagai package session valid
   services.displayManager.sessionPackages = [
-  (pkgs.writeTextDir "share/wayland-sessions/winboat-kiosk.desktop" ''
-    [Desktop Entry]
-    Name=Winboat Kiosk (labwc)
-    Comment=Lightweight Windows VM Kiosk Session with Emergency Terminal
-    Exec=${pkgs.labwc}/bin/labwc -e "winboat --fullscreen"
-    Type=Application
-    DesktopNames=labwc
-  '')
+    (pkgs.writeTextFile {
+      name = "winboat-kiosk-session";
+      destination = "/share/wayland-sessions/winboat-kiosk.desktop";
+      text = ''
+        [Desktop Entry]
+        Name=Winboat Kiosk (labwc)
+        Comment=Lightweight Windows VM Kiosk Session with Emergency Terminal
+        Exec=${pkgs.labwc}/bin/labwc -e "winboat --fullscreen"
+        Type=Application
+        DesktopNames=labwc
+      '';
+    })
   ];
 
   # List packages installed in system profile.
