@@ -156,6 +156,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.windowManager.openbox.enable = true;
   programs.xwayland.enable = true;
 
 
@@ -169,8 +170,8 @@
   environment.variables = {
      WLR_NO_HARDWARE_CURSORS = "1";
      GSK_RENDERER = "gl";
-     XCURSOR_THEME = "Bibata";
-     XCURSOR_SIZE = "24";
+     XCURSOR_THEME = "Bibata-Modern-Classic";
+     XCURSOR_SIZE = "16";
   };
 
   # Configure keymap in X11
@@ -263,8 +264,9 @@
   };
   # programs.firefox.enable = true;
   #programs.hyprland.enable = true;
+  
   programs.niri.enable = true;
-  #services.displayManager.ly.enable = true;
+  services.displayManager.ly.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -291,6 +293,7 @@
      eza
      bat
      s-tui
+     openbox
      #------
      
      
@@ -330,6 +333,7 @@
 
     #cursor
     bibata-cursors
+    adwaita-icon-theme # <-- Tambahkan ini buat fallback icon Wayland
 
     # devs thingy
      laravel

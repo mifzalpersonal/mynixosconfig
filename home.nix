@@ -77,7 +77,7 @@
   };
 
   home.pointerCursor = {
-    name = "Adwaita";
+    name = "Bibata-Modern-Classic";
     package = pkgs.gnome-themes-extra;
     enable = true;
   };
@@ -116,7 +116,7 @@
 qt = {
   enable = true;
   platformTheme.name = "gtk3";
-  style.name = "adwaita-dark";
+  style.name = "Bibata-Modern-Classic";
 };
 
 xdg.userDirs = {
