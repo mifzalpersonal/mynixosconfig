@@ -274,6 +274,12 @@
      imagemagick
      
 
+     #driver checkers
+     intel-gpu-tools
+     mesa-demos
+     vulkan-tools
+     libva-utils
+
 
     # devs thingy
      laravel
@@ -369,6 +375,9 @@
     extraPackages = with pkgs; [
       intel-media-driver # Driver VA-API resmi Intel buat Gen 9+ (i5-8250U)
       vulkan-validation-layers
+      intel-vaapi-driver
+      vulkan-tools
+      libvdpau-va-gl
     ];
     
     # Versi 32-bit driver Intel biar Steam 32-bit rendering-nya jos
@@ -376,6 +385,8 @@
       intel-media-driver
     ];
   };
+
+
 
   xdg.portal = {
     enable = true;
