@@ -267,6 +267,16 @@
   
   programs.niri.enable = true;
   services.displayManager.ly.enable = true;
+  services.displayManager.sessionPackages = [
+  (pkgs.writeTextDir "share/wayland-sessions/winboat-kiosk.desktop" ''
+    [Desktop Entry]
+    Name=Winboat Kiosk (labwc)
+    Comment=Lightweight Windows VM Kiosk Session with Emergency Terminal
+    Exec=${pkgs.labwc}/bin/labwc -e "winboat --fullscreen"
+    Type=Application
+    DesktopNames=labwc
+  '')
+  ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -334,6 +344,9 @@
     #cursor
     bibata-cursors
     adwaita-icon-theme # <-- Tambahkan ini buat fallback icon Wayland
+
+    #project iwnboat
+    labwc
 
     # devs thingy
      laravel
