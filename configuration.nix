@@ -10,7 +10,6 @@
       ./hardware-configuration.nix
       ./helix.nix
       ./cysec.nix
-      ./session.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -213,12 +212,12 @@
     enable = true;
     settings = {
       # Mulai ngecas kalau batre di bawah 75%, stop ngecas di 80%
-      START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 80;
+      #START_CHARGE_THRESH_BAT0 = 70;
+      #STOP_CHARGE_THRESH_BAT0 = 80;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
-      START_CHARGE_THRESH_BAT1 = 70;
-      STOP_CHARGE_THRESH_BAT1 = 80;
+      #START_CHARGE_THRESH_BAT1 = 70;
+      #STOP_CHARGE_THRESH_BAT1 = 80;
 
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -229,8 +228,66 @@
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+
+      # ==========================================
+      # POWER LIMIT SETUP KHUSUS INTEL (TLP)
+      # ==========================================
+      #Saat dicolok Charger (AC): Kasih napas lega
+       
+       PLATFORM_POWER_LIMIT_1_TIME_ON_AC = 28;
+       PLATFORM_POWER_LIMIT_1_POWER_ON_AC = 20000; # 25 Watt (dalam miliwatt)
+       PLATFORM_POWER_LIMIT_2_TIME_ON_AC = 28;
+       PLATFORM_POWER_LIMIT_2_POWER_ON_AC = 30000; # 35 Watt
+       
+       # Saat Mode BATERAI (BAT): KUNCI DI 10 WATT BIAR GAK DROP!
+       
+       PLATFORM_POWER_LIMIT_1_TIME_ON_BAT = 28;
+       PLATFORM_POWER_LIMIT_1_POWER_ON_BAT = 6000; # 10 Watt max
+       PLATFORM_POWER_LIMIT_2_TIME_ON_BAT = 28;
+       PLATFORM_POWER_LIMIT_2_POWER_ON_BAT = 6000; # 10 Watt max (no burst spike)
+
     };
   };
+
+  #services.throttled = {
+  #  enable = true;
+  #  extraConfig = ''
+  #    [GENERAL]
+  #    Enabled = True
+  #    Autoreload = True
+  #    #Sysfs_Update_Rate_s: 5
+  #
+  #    [BATTERY]
+  #    # KUNCI 7 WATT PAS BATERAI
+  #    Update_Rate_s = 30
+  #    PL1_Power_W: 7
+  #    PL1_Time_s: 28
+  #    PL2_Power_W: 7
+  #    PL2_Time_s: 0.002
+  #
+  #    [AC]
+  #    Update_Rate_s = 5
+  #    # PAS DICOLOK CHARGER
+  #    PL1_Power_W: 20
+  #    PL1_Time_s: 28
+  #    PL2_Power_W: 30
+  #    PL2_Time_s: 0.002
+#
+  #    [UNDERVOLT.BATTERY]
+  #    CORE: -100
+  #    GPU: -25
+  #    CACHE: -90
+  #    UNCORE: -25
+  #    ANALOGIO: 0
+#
+  #    [UNDERVOLT.AC]
+  #    CORE: -100
+  #    GPU: -25
+  #    CACHE: -90
+  #    UNCORE: -25
+  #    ANALOGIO: 0
+  #  '';
+  #};
   
   services.thinkfan = {
     enable = true;
@@ -481,15 +538,16 @@
     
     useTimer = true;
     # Pengaturan Power Limit (Optional, biar makin adem)
-    p1 = {
-      limit = 20;
-      window = 28;
-    }; 
+    
+    #p1 = {
+    #  limit = 20;
+    #  window = 28;
+    #}; 
 
-    p2 = { 
-      limit = 30;
-      window = 28;
-    }; 
+    #p2 = { 
+    #  limit = 30;
+    #  window = 28;
+    #}; 
   };
   
   users.users.ciel = {
