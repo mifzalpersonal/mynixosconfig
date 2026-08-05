@@ -216,13 +216,13 @@
       #STOP_CHARGE_THRESH_BAT0 = 80;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
-      #START_CHARGE_THRESH_BAT1 = 70;
-      #STOP_CHARGE_THRESH_BAT1 = 80;
+      START_CHARGE_THRESH_BAT1 = 70;
+      STOP_CHARGE_THRESH_BAT1 = 80;
 
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
-      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_BAT = 1;
       CPU_BOOST_ON_AC = 1;
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
@@ -529,7 +529,7 @@
   # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
   services.undervolt = {
     enable = true;
-    temp = 85;
+    temp = 70;
     
     # Voltage Offset (dalam mV, pake angka negatif)
     coreOffset = -100;   # CPU Core
