@@ -599,16 +599,16 @@
 
   #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   #services.scx = {
   #  enable = true;
   #  scheduler = "scx_nest";
   #};
 
-  services.scx.enable = true;
-  services.scx.scheduler = "scx_nest";
+  #services.scx.enable = true;
+  #services.scx.scheduler = "scx_nest";
 
   zramSwap = {
     enable = true;
