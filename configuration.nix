@@ -232,19 +232,19 @@
       # ==========================================
       # POWER LIMIT SETUP KHUSUS INTEL (TLP)
       # ==========================================
-      #Saat dicolok Charger (AC): Kasih napas lega
+      # Saat dicolok Charger (AC): Kasih napas lega
        
-       PLATFORM_POWER_LIMIT_1_TIME_ON_AC = 28;
-       PLATFORM_POWER_LIMIT_1_POWER_ON_AC = 20000; # 25 Watt (dalam miliwatt)
-       PLATFORM_POWER_LIMIT_2_TIME_ON_AC = 28;
-       PLATFORM_POWER_LIMIT_2_POWER_ON_AC = 30000; # 35 Watt
-       
-       # Saat Mode BATERAI (BAT): KUNCI DI 10 WATT BIAR GAK DROP!
-       
-       PLATFORM_POWER_LIMIT_1_TIME_ON_BAT = 28;
-       PLATFORM_POWER_LIMIT_1_POWER_ON_BAT = 6000; # 10 Watt max
-       PLATFORM_POWER_LIMIT_2_TIME_ON_BAT = 28;
-       PLATFORM_POWER_LIMIT_2_POWER_ON_BAT = 6000; # 10 Watt max (no burst spike)
+      # PLATFORM_POWER_LIMIT_1_TIME_ON_AC = 28;
+      # PLATFORM_POWER_LIMIT_1_POWER_ON_AC = 20000; # 25 Watt (dalam miliwatt)
+      # PLATFORM_POWER_LIMIT_2_TIME_ON_AC = 28;
+      # PLATFORM_POWER_LIMIT_2_POWER_ON_AC = 30000; # 35 Watt
+      # 
+      # # Saat Mode BATERAI (BAT): KUNCI DI 10 WATT BIAR GAK DROP!
+      # 
+      # PLATFORM_POWER_LIMIT_1_TIME_ON_BAT = 28;
+      # PLATFORM_POWER_LIMIT_1_POWER_ON_BAT = 6000; # 10 Watt max
+      # PLATFORM_POWER_LIMIT_2_TIME_ON_BAT = 28;
+      # PLATFORM_POWER_LIMIT_2_POWER_ON_BAT = 6000; # 10 Watt max (no burst spike)
 
     };
   };
@@ -298,7 +298,7 @@
       #[4 66 80]             # Level 4 (~3000 RPM): Baru naik kalau > 74°C
       #[6 72 84]             # Level 6 (~3500 RPM): Emergency > 80°C
       #["level auto" 82 100]
-
+  
       [0 0 57]              # OFF Total (0 RPM) dari 0°C sampai 57°C (Keinginan kamu!)
       ["level auto" 47 100] # Di atas 57°C, SERAHKAN KE BIOS (AUTO) sampai suhu turun lagi ke 48°C
     ];
@@ -597,8 +597,19 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
+  #services.scx = {
+  #  enable = true;
+  #  scheduler = "scx_nest";
+  #};
+
   services.scx.enable = true;
+  services.scx.scheduler = "scx_nest";
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
