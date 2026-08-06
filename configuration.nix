@@ -333,6 +333,7 @@
      neovim
      thunar-archive-plugin  # Klik kanan -> Extract / Compress
      thunar-volman        # Auto mount USB / Flashdisk
+     brightnessctl
      
      # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
      tumbler                     # Engine preview gambar
