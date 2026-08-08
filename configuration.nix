@@ -324,7 +324,7 @@
     XDG_CURRENT_DESKTOP = "niri";
 
     # Memaksa portal GNOME mengenali environment
-    XDG_SESSION_TYPE = "wayland";
+    # XDG_SESSION_TYPE = "wayland";
   };
   # programs.firefox.enable = true;
   #programs.hyprland.enable = true;
@@ -346,9 +346,9 @@
      ffmpegthumbnailer           # Preview video
      poppler-utils               # Preview PDF
      file-roller                 # App GUI pendukung ekstraksi zip
-     xfce.xfconf
+     xfconf
      libnotify
-     xfce.xfce4-panel-profiles
+     xfce4-panel-profiles
      
     #python pip
     (python3.withPackages (ps: with ps; [
@@ -521,10 +521,9 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = false;
+    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
     ];
     config = {
       common = {
@@ -532,9 +531,7 @@
       };
       # Gunakan lib.mkForce untuk menimpa nilai default dari modul programs.niri
       niri = {
-        default = lib.mkForce [ "gnome" "gtk" ];
-        "org.freedesktop.impl.portal.Screencast" = lib.mkForce [ "gnome" ];
-        "org.freedesktop.impl.portal.Screenshot" = lib.mkForce [ "gnome" ];
+        default = lib.mkForce [ "gtk" ];
       };
     };
   };
