@@ -387,7 +387,7 @@
      bazaar
      ollama
      obsidian
-     ani-cli
+     #ani-cli
      ncdu
      img2pdf
      imagemagick
@@ -404,6 +404,7 @@
      mpv
      aria2
      ffmpeg
+     yt-dlp
 
     #cursor
     bibata-cursors
