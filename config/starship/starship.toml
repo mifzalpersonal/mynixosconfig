@@ -1,5 +1,5 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-scan_timeout = 100
+scan_timeout = 50
 # Cuma pakai 2 Tone utama: 
 # Tone 1 (Accent) = color3 (Kuning/Cream M3)
 # Tone 2 (Surface/Container) = color8 (Muted Surface M3)
