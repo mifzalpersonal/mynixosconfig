@@ -220,15 +220,18 @@
       START_CHARGE_THRESH_BAT1 = 70;
       STOP_CHARGE_THRESH_BAT1 = 80;
 
-      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau powersave
+      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # Atau performance 
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
-      CPU_BOOST_ON_BAT = 1;
+      CPU_BOOST_ON_BAT = 0;
       CPU_BOOST_ON_AC = 1;
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
-      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "off";
 
       # ==========================================
       # POWER LIMIT SETUP KHUSUS INTEL (TLP)
@@ -545,7 +548,7 @@
   # Enable undervolt service for ThinkPad T480 (Kaby Lake R)
   services.undervolt = {
     enable = true;
-    temp = 70;
+    temp = 85;
     
     # Voltage Offset (dalam mV, pake angka negatif)
     coreOffset = -100;   # CPU Core
@@ -555,15 +558,15 @@
     useTimer = true;
     # Pengaturan Power Limit (Optional, biar makin adem)
     
-    #p1 = {
-    #  limit = 20;
-    #  window = 28;
-    #}; 
-
-    #p2 = { 
-    #  limit = 30;
-    #  window = 28;
-    #}; 
+    p1 = {
+      limit = 20;
+      window = 28;
+    }; 
+    
+    p2 = { 
+      limit = 30;
+      window = 28;
+    }; 
   };
   
   users.users.ciel = {
@@ -613,15 +616,14 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   #boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-  #services.scx = {
-  #  enable = true;
-  #  scheduler = "scx_nest";
-  #};
+  services.scx = {
+    enable = true;
+  };
 
   #services.scx.enable = true;
   #services.scx.scheduler = "scx_nest";
