@@ -391,6 +391,7 @@
      ncdu
      img2pdf
      imagemagick
+     mangohud
      
 
      #driver checkers
