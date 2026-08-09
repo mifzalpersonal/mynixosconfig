@@ -535,20 +535,39 @@
       #pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gnome
     ];
+
     config = {
       common = {
         default = [ "gnome" "gtk" ]; # "wlr"
       };
-      niri = {
-        default = [ "gnome" "gtk" ]; # "wlr"
-      };
+    niri = {
+      default = lib.mkForce [ "gnome" "gtk" ];
     };
+    };
+
+    #config.niri = {
+    #  # Use GNOME for screen sharing (Niri implements the Mutter interface)
+    #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+    #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+    #
+    #  # Use GTK for file choosers (avoids Nautilus dependency)
+    #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+    #  "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+    #};
+    #
+    #config.common = {
+    #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+    #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+    #};
   };
 
-  #systemd.user.services.xdg-desktop-portal-wlr.environment = {
-  #  WAYLAND_DISPLAY = "wayland-1";
-  #  XDG_CURRENT_DESKTOP = "sway";
-  #};
+  #environment.sessionVariables.XDG_CURRENT_DESKTOP = "niri:GNOME";
+
+  systemd.user.services.xdg-desktop-portal-gnome.environment = {
+    WAYLAND_DISPLAY = "wayland-1";
+    XDG_CURRENT_DESKTOP = "niri:GNOME";
+    XDG_SESSION_DESKTOP = "niri";
+  };
 
   
 

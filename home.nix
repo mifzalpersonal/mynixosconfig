@@ -150,7 +150,7 @@ xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
 xdg.configFile."niri/config.kdl".source = ./config/niri/config.kdl;
 xdg.configFile."helix/config.toml".source = ./config/helix/config.toml;
 xdg.configFile."helix/languages.toml".source = ./config/helix/languages.toml;
-#xdg.configFile."xdg-desktop-portal/portals.conf".source = ./config/xdg-desktop-portal/portals.conf;
+xdg.configFile."xdg-desktop-portal/portals.conf".source = ./config/xdg-desktop-portal/portals.conf;
 
   # Aktifkan modul internal Home Manager
 programs.home-manager.enable = true;

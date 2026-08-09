@@ -274,7 +274,8 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "noctalia-shell"
 spawn-at-startup "env DISPLAY=:0 steam"
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP=niri:GNOME"
+spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal" "xdg-desktop-portal-gnome"
 
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
