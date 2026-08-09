@@ -213,22 +213,22 @@
     enable = true;
     settings = {
       # Mulai ngecas kalau batre di bawah 75%, stop ngecas di 80%
-      #START_CHARGE_THRESH_BAT0 = 70;
-      #STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT0 = 70;
+      STOP_CHARGE_THRESH_BAT0 = 80;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
       START_CHARGE_THRESH_BAT1 = 70;
       STOP_CHARGE_THRESH_BAT1 = 80;
 
-      CPU_SCALING_GOVERNOR_ON_AC = "performance"; # Atau performance 
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
       CPU_BOOST_ON_BAT = 0;
       CPU_BOOST_ON_AC = 1;
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
