@@ -156,8 +156,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.windowManager.openbox.enable = true;
+  #services.xserver.windowManager.openbox.enable = true;
   programs.xwayland.enable = true;
 
 
@@ -169,7 +170,6 @@
   #services.gnome.games.enable = false;
 
   environment.variables = {
-     WLR_NO_HARDWARE_CURSORS = "1";
      GSK_RENDERER = "gl";
      XCURSOR_THEME = "Bibata-Modern-Classic";
      XCURSOR_SIZE = "16";
@@ -213,12 +213,12 @@
     enable = true;
     settings = {
       # Mulai ngecas kalau batre di bawah 75%, stop ngecas di 80%
-      START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT0 = 90;
+      STOP_CHARGE_THRESH_BAT0 = 95;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
-      START_CHARGE_THRESH_BAT1 = 70;
-      STOP_CHARGE_THRESH_BAT1 = 80;
+      START_CHARGE_THRESH_BAT1 = 90;
+      STOP_CHARGE_THRESH_BAT1 = 95;
 
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -321,7 +321,6 @@
   
     # Aktifkan fitur modern Thunar (thumbnail & preview)
     GDK_BACKEND = "wayland,x11";
-    XDG_CURRENT_DESKTOP = "niri";
 
     # Memaksa portal GNOME mengenali environment
     # XDG_SESSION_TYPE = "wayland";
@@ -331,6 +330,7 @@
   
   programs.niri.enable = true;
   services.displayManager.ly.enable = true;
+  #services.displayManager.gdm.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -348,7 +348,6 @@
      file-roller                 # App GUI pendukung ekstraksi zip
      xfconf
      libnotify
-     xfce4-panel-profiles
      
     #python pip
     (python3.withPackages (ps: with ps; [
@@ -366,7 +365,6 @@
      eza
      bat
      s-tui
-     openbox
      #------
      
      
@@ -382,6 +380,9 @@
      flatpak
      file
      obs-studio
+     
+    
+
      cava
      xwayland-satellite #its for xxwayland so steam can run
      bazaar
@@ -392,7 +393,6 @@
      img2pdf
      imagemagick
      mangohud
-     
 
      #driver checkers
      intel-gpu-tools
@@ -433,6 +433,13 @@
      tmux
      helix
     # --------
+
+    #(wrapOBS {
+    #  plugins = with obs-studio-plugins; [
+    #    obs-pipewire-audio-capture
+    #    wlrobs
+    #    ];
+    #})
   ];
 
   #-------------DEVSSS-------------
@@ -522,20 +529,26 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    #wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      #pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gnome
     ];
     config = {
       common = {
-        default = [ "gtk" ];
+        default = [ "gnome" "gtk" ]; # "wlr"
       };
-      # Gunakan lib.mkForce untuk menimpa nilai default dari modul programs.niri
       niri = {
-        default = lib.mkForce [ "gtk" ];
+        default = [ "gnome" "gtk" ]; # "wlr"
       };
     };
   };
+
+  #systemd.user.services.xdg-desktop-portal-wlr.environment = {
+  #  WAYLAND_DISPLAY = "wayland-1";
+  #  XDG_CURRENT_DESKTOP = "sway";
+  #};
 
   
 
@@ -572,7 +585,7 @@
     isNormalUser = true;
     description = "ciel";
     shell = pkgs.fish; # <-- TAMBAHKAN BARIS INI!
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render"];
   };
 
   systemd.services."home-manager-ciel" = {
