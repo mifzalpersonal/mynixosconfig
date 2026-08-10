@@ -18,7 +18,7 @@
     user.name = "mifzalpersonal";
     user.email = "mizakigaming89@gmail.com";
     init.defaultBranch = "main";
-          };
+    };
   };
 
   programs.fish = {
@@ -127,10 +127,10 @@ xdg.userDirs = {
   pictures = "${config.home.homeDirectory}/Pictures";
 };
 
-xdg.configFile."user-dirs.conf" = {
-  text = "enabled=True";
-  force = true;
-};
+#xdg.configFile."user-dirs.conf" = {
+#  text = "enabled=True";
+#  force = true;
+#};
 
 #------------------SLOPPPPPPPPPPPPPPPP----------------------
 
@@ -141,7 +141,6 @@ home.sessionVariables = {
     
     # Memaksa toolkit GTK tua (yang belum support Wayland) otomatis lari ke X11
     # Tanpa merusak aplikasi GTK4 modern yang udah native Wayland.
-    GDK_BACKEND = "wayland,x11"; 
   };
 
 #xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
@@ -150,7 +149,7 @@ xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
 xdg.configFile."niri/config.kdl".source = ./config/niri/config.kdl;
 xdg.configFile."helix/config.toml".source = ./config/helix/config.toml;
 xdg.configFile."helix/languages.toml".source = ./config/helix/languages.toml;
-xdg.configFile."xdg-desktop-portal/portals.conf".source = ./config/xdg-desktop-portal/portals.conf;
+#xdg.configFile."xdg-desktop-portal/portals.conf".source = ./config/xdg-desktop-portal/portals.conf;
 
   # Aktifkan modul internal Home Manager
 programs.home-manager.enable = true;

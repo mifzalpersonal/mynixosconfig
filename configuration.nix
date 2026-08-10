@@ -17,14 +17,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
-    "quiet"                          # Sembunyikan pesan booting bawaan
-    "splash"                         # Tampilan booting bersih
-    "loglevel=3"                     # Cuma tampilkan log error penting
-    "rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
+    #"quiet"                          # Sembunyikan pesan booting bawaan
+    #"splash"                         # Tampilan booting bersih
+    "loglevel=4"                     # Cuma tampilkan log error penting
+    #"rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
     "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
 
-    "rd.udev.log_level=3"
-    "udev.log_priority=3"
+    "rd.udev.log_level=4"
+    "udev.log_priority=4"
 
     "i915.enable_guc=3"   # Enable GuC submission & HuC loading (Offload scheduler ke GPU)
     "i915.enable_psr=0"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
@@ -34,20 +34,20 @@
   ];
 
   #------------------THE START OF PLYMOMUHT---------------------
-  boot.plymouth = {
-    enable = true;
-    theme = "catppuccin-macchiato"; # Pilihan: catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-    
-    themePackages = [
-      (pkgs.catppuccin-plymouth.override {
-        variant = "macchiato"; # Samakan varian warnanya di sini
-      })
-    ];
-  };
-
-  # 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
+  #boot.plymouth = {
+  #  enable = true;
+  #  theme = "catppuccin-macchiato"; # Pilihan: catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+  #  
+  #  themePackages = [
+  #    (pkgs.catppuccin-plymouth.override {
+  #      variant = "macchiato"; # Samakan varian warnanya di sini
+  #    })
+  #  ];
+  #};
+  #
+  ## 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
+  boot.consoleLogLevel = 4;
+  boot.initrd.verbose = true;
   boot.initrd.kernelModules = [ "i915" ];
 
   #------------------THE END OF PLYMOMUHT---------------------
@@ -163,7 +163,8 @@
 
 
   # Enable the GNOME Desktop Environment.
-  # services.displayManager.gdm.enable = true;
+  #services.displayManager.ly.enable = true;
+  #services.displayManager.gdm.enable = true;
   #services.desktopManager.gnome.enable = false;
   #services.gnome.core-apps.enable = false;
   #services.gnome.core-developer-tools.enable = false;
@@ -320,7 +321,7 @@
     GTK_THEME = "catppuccin-mocha-blue-standard";
   
     # Aktifkan fitur modern Thunar (thumbnail & preview)
-    GDK_BACKEND = "wayland,x11";
+    #GDK_BACKEND = "wayland,x11";
 
     # Memaksa portal GNOME mengenali environment
     # XDG_SESSION_TYPE = "wayland";
@@ -329,8 +330,6 @@
   #programs.hyprland.enable = true;
   
   programs.niri.enable = true;
-  services.displayManager.ly.enable = true;
-  #services.displayManager.gdm.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -527,23 +526,23 @@
 
 
 
-  xdg.portal = {
-    enable = true;
-    #wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      #pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gnome
-    ];
-
-    config = {
-      common = {
-        default = [ "gnome" "gtk" ]; # "wlr"
-      };
-    niri = {
-      default = lib.mkForce [ "gnome" "gtk" ];
-    };
-    };
+  #xdg.portal = {
+  #  enable = true;
+  #  #wlr.enable = true;
+  #  extraPortals = [
+  #    pkgs.xdg-desktop-portal-gtk
+  #    #pkgs.xdg-desktop-portal-wlr
+  #    pkgs.xdg-desktop-portal-gnome
+  #  ];
+  #
+  #  config = {
+  #    common = {
+  #      default = [ "gnome" "gtk" ]; # "wlr"
+  #    };
+  #  niri = {
+  #    default = lib.mkForce [ "gnome" "gtk" ];
+  #  };
+  #  };
 
     #config.niri = {
     #  # Use GNOME for screen sharing (Niri implements the Mutter interface)
@@ -559,15 +558,15 @@
     #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
     #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
     #};
-  };
+  #};
 
   #environment.sessionVariables.XDG_CURRENT_DESKTOP = "niri:GNOME";
 
-  systemd.user.services.xdg-desktop-portal-gnome.environment = {
-    WAYLAND_DISPLAY = "wayland-1";
-    XDG_CURRENT_DESKTOP = "niri:GNOME";
-    XDG_SESSION_DESKTOP = "niri";
-  };
+  #systemd.user.services.xdg-desktop-portal-gnome.environment = {
+  #  WAYLAND_DISPLAY = "wayland-1";
+  #  XDG_CURRENT_DESKTOP = "niri:GNOME";
+  #  XDG_SESSION_DESKTOP = "niri";
+  #};
 
   
 
