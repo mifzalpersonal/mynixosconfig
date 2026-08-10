@@ -77,6 +77,9 @@
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   services.cloudflare-warp.enable = true;
+  services.tailscale.enable = true;
+
+  programs.wayvnc.enable = true; 
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -381,6 +384,8 @@
      obs-studio
      ventoy-full
      
+     #sehari hari alias bloat
+     
     
 
      cava
@@ -432,6 +437,7 @@
      php84Packages.composer
      tmux
      helix
+     wayvnc
     # --------
 
     #(wrapOBS {
@@ -447,8 +453,6 @@
     enable = true;
     package = pkgs.mariadb;
   };
-
-  
 
   services.flatpak.enable = true;
 
@@ -701,7 +705,15 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  
+  networking.firewall = {
+    enable = true;
+    ## Port TCP wajib Sunshine & GameStream
+    allowedTCPPorts = [ 5900 ];
+    ## Port UDP wajib Sunshine (GameStream audio/video/control)
+  };
+
+  #networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
