@@ -38,7 +38,7 @@ input {
         // drag false
         // drag-lock
         natural-scroll
-        accel-speed 0.1
+        accel-speed 0.2
         accel-profile "adaptive"
         scroll-method "two-finger"
         // disabled-on-external-mouse
@@ -202,7 +202,7 @@ layout {
         off
 
         width 4
-        active-color "#ffc87f"
+        active-color "#222831"
         inactive-color "#505050"
 
         // Color of the border around windows that request your attention.

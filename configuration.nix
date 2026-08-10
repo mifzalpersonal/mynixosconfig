@@ -164,7 +164,7 @@
 
   # Enable the GNOME Desktop Environment.
   #services.displayManager.ly.enable = true;
-  #services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   #services.desktopManager.gnome.enable = false;
   #services.gnome.core-apps.enable = false;
   #services.gnome.core-developer-tools.enable = false;
@@ -379,6 +379,7 @@
      flatpak
      file
      obs-studio
+     ventoy-full
      
     
 
@@ -615,6 +616,7 @@
     allowUnfree = true;
     permittedInsecurePackages = [
       "electron-40.10.5"
+      "ventoy-1.1.12"
     ];
   };
 
