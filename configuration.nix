@@ -84,6 +84,7 @@
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
+  services.blueman.enable = true;
   hardware.bluetooth = {
   enable = true;
   powerOnBoot = false;
@@ -385,8 +386,23 @@
      ventoy-full
      
      #sehari hari alias bloat
-     
-    
+     gnome-calculator      # Kalkulator GTK simpel & responsif
+     cheese                # App Kamera (Webcam viewer)
+     gnome-clocks          # Jam, Timer, Stopwatch, Alarm
+     gnome-text-editor     # Text editor GUI ringan
+ 
+     # --- GAMING & FUN ---
+     gnome-chess           # Game Catur (vs AI/GNU Chess)
+     gnuchess              # Engine AI catur biar gnome-chess bisa dimainin
+     aisleriot             # Solitaire / Kartu klasik bawaan
+ 
+     # --- MEDIA & SYSTEM MANAGEMENT ---
+     loupe                 # Image Viewer modern (replacement EOG di Wayland)
+     evince                # PDF Reader
+     baobab                # Disk Usage Analyzer (buat cek kapasitas SSD)
+     vlc
+     nautilus
+     blueman
 
      cava
      xwayland-satellite #its for xxwayland so steam can run
