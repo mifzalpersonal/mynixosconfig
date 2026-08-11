@@ -218,11 +218,11 @@
     enable = true;
     settings = {
       # Mulai ngecas kalau batre di bawah 75%, stop ngecas di 80%
-      START_CHARGE_THRESH_BAT0 = 90;
+      START_CHARGE_THRESH_BAT0 = 95;
       STOP_CHARGE_THRESH_BAT0 = 98;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
-      START_CHARGE_THRESH_BAT1 = 90;
+      START_CHARGE_THRESH_BAT1 = 95;
       STOP_CHARGE_THRESH_BAT1 = 98;
 
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 

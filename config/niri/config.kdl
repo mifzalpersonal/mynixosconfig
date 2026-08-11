@@ -360,10 +360,10 @@ window-rule {
     open-maximized false
 
     opacity 0.85          // Opacity saat tidak fokus
-    draw-border-with-background false
-    background-effect {
-        blur true
-    }
+    //draw-border-with-background false
+    //background-effect {
+    //    blur true
+    //}
 }
 
 window-rule {
