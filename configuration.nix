@@ -344,6 +344,9 @@
      thunar-volman        # Auto mount USB / Flashdisk
      brightnessctl
      nh
+     unzip
+     p7zip
+     unrar
      
      # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
      tumbler                     # Engine preview gambar
@@ -420,6 +423,7 @@
      img2pdf
      imagemagick
      mangohud
+
 
      #driver checkers
      intel-gpu-tools

@@ -55,6 +55,14 @@
       confirm_os_window_close = 0;
       disable_ligatures = "never";
       
+      # --- EFEK REAKTIF / TRAIL (Fitur Kitty Terbaru) ---
+      # Mengaktifkan efek ekor/jejak saat kursor bergerak/ketik
+      cursor_trail = "3";
+      # Kecepatan memudar efek ekor (start_decay end_decay)
+      cursor_trail_decay = "0.1 0.4";
+      # Ambang batas jarak minimal (pixel) kursor bergerak untuk memicu efek trail
+      cursor_trail_start_threshold = "2";
+      
     };
 
     extraConfig = ''
