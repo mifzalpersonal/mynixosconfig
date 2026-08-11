@@ -357,8 +357,13 @@ window-rule {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
-    opacity 0.9
     open-maximized false
+
+    opacity 0.85          // Opacity saat tidak fokus
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
 }
 
 window-rule {
