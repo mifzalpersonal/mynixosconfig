@@ -343,6 +343,7 @@
      thunar-archive-plugin  # Klik kanan -> Extract / Compress
      thunar-volman        # Auto mount USB / Flashdisk
      brightnessctl
+     nh
      
      # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
      tumbler                     # Engine preview gambar
@@ -403,6 +404,11 @@
      vlc
      nautilus
      blueman
+     gparted
+
+     #mau maen gaming ah
+     ppsspp
+     pcsx2
 
      cava
      xwayland-satellite #its for xxwayland so steam can run
@@ -429,7 +435,7 @@
 
     #cursor
     bibata-cursors
-    adwaita-icon-theme # <-- Tambahkan ini buat fallback icon Wayland
+    adwaita-icon-theme 
 
     #project iwnboat
     #labwc
@@ -447,7 +453,7 @@
      winboat
      vscode-fhs
      python313Packages.pip
-     llama-cpp-vulkan
+     llama-cpp
      aider-chat-full
      php84
      php84Packages.composer
@@ -490,12 +496,21 @@
   ];
 
    environment.shellAliases = {
-    gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
-    rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
-    rbf = "sudo nixos-rebuild switch --no-reexec --flake /etc/nixos#nix";
-    rbo = "sudo nixos-rebuild switch --no-reexec --option substitute false --flake /etc/nixos#nix";
-    gc = "sudo nix-collect-garbage -d -v";  
-    up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
+    
+    #gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+    #rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
+    #rbf = "sudo nixos-rebuild switch --no-reexec --flake /etc/nixos#nix";
+    #rbo = "sudo nixos-rebuild switch --no-reexec --option substitute false --flake /etc/nixos#nix";
+    #gc = "sudo nix-collect-garbage -d -v";  
+    #up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
+
+    gen = "nh os info";
+    rb  = "nh os switch /etc/nixos#nix";
+    rbf = "nh os switch --no-reexec /etc/nixos#nix";
+    rbo = "nh os switch --no-reexec -- --option substitute false /etc/nixos#nix";
+    gc  = "nh clean all";
+    up  = "nh os switch --update /etc/nixos#nix";
+
     ls = "eza --icons --group-directories-first";
     ll = "eza -l --icons --group-directories-first";
     tree = "eza --tree --icons";

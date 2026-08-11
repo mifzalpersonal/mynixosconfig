@@ -11,7 +11,8 @@
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    qylock.url = "github:Darkkal44/qylock";
+
+    #qylock.url = "github:Darkkal44/qylock";
 
   };
 
@@ -20,7 +21,7 @@
       self,
       nixpkgs,
       home-manager,
-      qylock,
+      #qylock,
       ...
     }@inputs:
     {
@@ -29,53 +30,53 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            qylock.nixosModules.default
+            #qylock.nixosModules.default
             ({ pkgs, ... }: {
               services.displayManager.sddm = {
                 enable = false;
                 wayland.enable = true;
 
-                setupScript = ''
-                  ${pkgs.xrdb}/bin/xrdb -merge - <<EOF
-                  Xcursor.theme: Bibata-Modern-Classic
-                  Xcursor.size: 16
-                  EOF
-                '';
+                #setupScript = ''
+                #  ${pkgs.xrdb}/bin/xrdb -merge - <<EOF
+                #  Xcursor.theme: Bibata-Modern-Classic
+                #  Xcursor.size: 16
+                #  EOF
+                #'';
 
-                settings = {
-                  Theme = {
-                    CursorTheme = "Bibata-Modern-Classic"; # Atau "Adwaita" / "breeze_cursors"
-                    CursorSize = "16";
-                  };
+                #settings = {
+                #  Theme = {
+                #    CursorTheme = "Bibata-Modern-Classic"; # Atau "Adwaita" / "breeze_cursors"
+                #    CursorSize = "16";
+                #  };
 
-                  General = {
-                    EnableHiDPI = "true";
-                    # Memaksa Wayland compositor bawaan SDDM (KWin/Weston) menampilkan kursor
-                    DisplayServer = "wayland";
-                  };
+                  #General = {
+                  #  EnableHiDPI = "true";
+                  #  # Memaksa Wayland compositor bawaan SDDM (KWin/Weston) menampilkan kursor
+                  #  DisplayServer = "wayland";
+                  #};
 
-                };
+                #};
               };
 
-              services.displayManager.defaultSession = "niri";
+              #services.displayManager.defaultSession = "niri";
 
-              programs.qylock = {
-                enable = false;
-                theme = "pixel-sakura"; # any directory name under themes/
-                sddm.enable = false; # installs theme + sets it active (default)
-                quickshell.enable = true; # adds `qylock-lock` to PATH (default)
-
-                # Optional per-theme tweaks (replaces the interactive prompts):
-                themeOptions = {
-                  terraria.backgroundMode = "time"; # time | random | static
-                  Genshin.backgroundMode = "time";
-                  clockwork.orbital = {
-                    themeMode = "dark";
-                    enableWindup = true;
-                  };
-                  osu.gameMode = "menu"; # menu | game
-                };
-              };
+              #programs.qylock = {
+              #  enable = false;
+              #  theme = "pixel-sakura"; # any directory name under themes/
+              #  sddm.enable = false; # installs theme + sets it active (default)
+              #  quickshell.enable = true; # adds `qylock-lock` to PATH (default)
+              #
+              #  # Optional per-theme tweaks (replaces the interactive prompts):
+              #  themeOptions = {
+              #    terraria.backgroundMode = "time"; # time | random | static
+              #    Genshin.backgroundMode = "time";
+              #    clockwork.orbital = {
+              #      themeMode = "dark";
+              #      enableWindup = true;
+              #    };
+              #    osu.gameMode = "menu"; # menu | game
+              #  };
+              #};
             })
 
             #-----------------
