@@ -233,7 +233,7 @@
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
 
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";

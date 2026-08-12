@@ -61,7 +61,7 @@
       # Kecepatan memudar efek ekor (start_decay end_decay)
       cursor_trail_decay = "0.1 0.4";
       # Ambang batas jarak minimal (pixel) kursor bergerak untuk memicu efek trail
-      cursor_trail_start_threshold = "2";
+      cursor_trail_start_threshold = "1";
       
     };
 

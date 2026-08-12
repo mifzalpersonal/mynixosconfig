@@ -113,7 +113,7 @@ input {
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Layout
 layout {
-    background-color "#000000"
+    background-color "transparent"
     // Set gaps around windows in logical pixels.
     gaps 7
 
@@ -264,6 +264,17 @@ layout {
         // top 64
         // bottom 64
     }
+}
+
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace=".*wallpaper.*"
+    place-within-backdrop true
+}
+
+overview {
+    backdrop-color "#00000000"
 }
 
 // Add lines like this to spawn processes at startup.
