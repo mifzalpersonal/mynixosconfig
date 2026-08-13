@@ -343,6 +343,11 @@
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      neovim
+     gcc
+     ripgrep
+     fd
+     lazygit
+     fzf
      thunar-archive-plugin  # Klik kanan -> Extract / Compress
      thunar-volman        # Auto mount USB / Flashdisk
      brightnessctl
