@@ -61,6 +61,9 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.scanRandMacAddress = true;
+  networking.networkmanager.ethernet.macAddress = "random";
+  networking.networkmanager.wifi.macAddress = "random";
   #networking.networkmanager.settings = {
     
     # dhcp = {
@@ -455,7 +458,6 @@
      go
      docker
      winboat
-     vscode-fhs
      python313Packages.pip
      llama-cpp
      aider-chat-full
@@ -464,6 +466,7 @@
      tmux
      helix
      wayvnc
+     zeal
     # --------
 
     #(wrapOBS {
