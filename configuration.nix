@@ -344,6 +344,7 @@
      wget
      neovim
      gcc
+     tree-sitter        # CLI Tree-sitter
      ripgrep
      fd
      lazygit
