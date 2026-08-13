@@ -16,6 +16,8 @@ environment.systemPackages = with pkgs; [
     metasploit
     ngrok
     burpsuite
+    arp-scan
+    aircrack-ng
   ];
 
 
