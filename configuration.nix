@@ -387,6 +387,7 @@
      eza
      bat
      s-tui
+     chafa
      #------
      
      
