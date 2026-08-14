@@ -501,6 +501,12 @@
     enable = true;
     enableOnBoot = false; # Biar gak ngerem booting
   };
+
+  services.ollama = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 11434;
+  };
   #--------------------------------
 
   
