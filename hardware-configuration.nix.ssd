@@ -17,20 +17,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/76be98bc-2d0e-4654-8998-8cfad264d6c3";
+    { device = "/dev/disk/by-uuid/25fb2851-0a77-49fe-939c-7f91b63dad5b";
       fsType = "btrfs";
       options = [
-        "noatime"
-        "compress=zstd:1"
-        "space_cache=v2"
-        "ssd"
-        "discard=async"
-        "commit=120"
+	"noatime"
+	"compress=zstd:1"
+	"space_cache=v2"
+
+  # --- TAMBAHAN BIAR MAKIN GACOR ---
+  "ssd"             # Maksa Btrfs optimasi alokasi blok khusus SSD (bukan HDD)
+  "discard=async"   # TRIM otomatis di background tanpa bikin I/O lag/lagging
+  "commit=120"      # Nunda flush cache dari RAM ke disk tiap 120 detik (bawaannya 30 detik)
+  "clear_cache"     # Opsional: membersihkan/rebuild cache jika ada sisa cache lama
       ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2EEC-97ED";
+    { device = "/dev/disk/by-uuid/9D66-6620";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };

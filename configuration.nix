@@ -225,8 +225,8 @@
       STOP_CHARGE_THRESH_BAT0 = 98;
       
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
-      START_CHARGE_THRESH_BAT1 = 95;
-      STOP_CHARGE_THRESH_BAT1 = 98;
+      START_CHARGE_THRESH_BAT1 = 75;
+      STOP_CHARGE_THRESH_BAT1 = 80;
 
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -392,6 +392,7 @@
      
      
      brave
+     alacritty
      kitty
      steam
      thunar
@@ -452,6 +453,7 @@
      aria2
      ffmpeg
      yt-dlp
+     ntfs3g
 
     #cursor
     bibata-cursors
@@ -709,6 +711,9 @@
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
+  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" ];
+  security.polkit.enable = true;
+  
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
