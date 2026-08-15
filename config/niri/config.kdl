@@ -163,7 +163,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 3
+        width 4
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -521,6 +521,15 @@ window-rule {
     background-effect {
         blur true
     }
+}
+
+window-rule {
+    match app-id="code"
+    draw-border-with-background true
+    background-effect {
+        blur false
+    }
+    opacity 0.8
 }
 
 binds {
