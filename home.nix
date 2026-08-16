@@ -32,6 +32,12 @@
 
           echo -e "\n\n\n\n\n\n\n\n\n"
       end
+
+      function turbo
+        echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+        $argv
+        echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+      end
     '';
   };
 
