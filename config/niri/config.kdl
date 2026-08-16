@@ -527,9 +527,9 @@ window-rule {
     match app-id="code"
     draw-border-with-background true
     background-effect {
-        blur false
+        blur true
     }
-    opacity 0.85
+    opacity 0.90
 }
 
 binds {
