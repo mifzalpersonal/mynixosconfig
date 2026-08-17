@@ -559,8 +559,7 @@
 
   # Aktifkan Gamescope
   programs.gamescope = {
-    enable = true;
-    capSysNice = true; # Memberi prioritas penjadwalan CPU/process ke gamescope
+    enable = true; 
   };
 
   programs.fish.enable = true;
