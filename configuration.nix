@@ -454,6 +454,8 @@
      ffmpeg
      yt-dlp
      ntfs3g
+     pciutils
+     usbutils
 
     #cursor
     bibata-cursors
