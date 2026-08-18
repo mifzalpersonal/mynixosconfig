@@ -535,7 +535,7 @@
     #up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
 
     gen = "nh os info";
-    rb  = "nh os switch /etc/nixos#nix";
+    rb  = "nh os switch /etc/nixos#nix -v";
     rbf = "nh os switch --no-reexec /etc/nixos#nix";
     rbo = "nh os switch --no-reexec -- --option substitute false /etc/nixos#nix";
     gc  = "nh clean all";
@@ -715,10 +715,10 @@
   boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" ];
   security.polkit.enable = true;
   
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
-  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   services.scx = {
     enable = true;

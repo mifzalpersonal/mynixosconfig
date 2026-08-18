@@ -28,9 +28,7 @@
 
       set random_img (random choice /etc/nixos/genshin-chibis/*.png)
       if test -f "$random_img"
-          kitty +kitten icat --place 20x20@0x0 "$random_img"
-
-          echo -e "\n\n\n\n\n\n\n\n\n"
+          chafa --size=20x20 $random_img
       end
 
       function turbo
@@ -39,7 +37,8 @@
         echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
       end
     '';
-  };
+  };# kitty +kitten icat --place 20x20@0x0 "$random_img"
+  
 
   programs.starship = {
     enable = true;
