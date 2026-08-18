@@ -720,12 +720,13 @@
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
-  services.scx = {
-    enable = true;
-  };
 
-  #services.scx.enable = true;
-  #services.scx.scheduler = "scx_nest";
+  #services.scx = {
+  #  enable = true;
+  #};
+
+  services.scx.enable = true;
+  services.scx.scheduler = "scx_bpfland";
 
   zramSwap = {
     enable = true;
