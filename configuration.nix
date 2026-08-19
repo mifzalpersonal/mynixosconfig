@@ -729,8 +729,8 @@
   
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   #boot.kernelPackages = pkgs.cachyoskernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
   # 1. Daftarkan Overlay xddxdd
