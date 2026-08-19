@@ -693,6 +693,18 @@
 
     http-connections = 50; #50 orang kerja free labor
     max-substitution-jobs = 128;
+
+    # MASUKKAN CACHE XDDXDD DI SINI:
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nyx.chaotic.cx"
+      #"https://attic.xuyh0120.win/lantian"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "chaotic-nyx.cachix.org-1:1g/B464uu16beB4y9RAG05oYgKmg8C8y6jvgfL/o+B4="
+      #"lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+    ];
   }; 
 
   nix.gc = {
@@ -715,11 +727,20 @@
   boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" ];
   security.polkit.enable = true;
   
-  #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
   #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  #boot.kernelPackages = pkgs.cachyoskernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
+  # 1. Daftarkan Overlay xddxdd
+  #nixpkgs.overlays = [
+  #  inputs.nix-cachyos-kernel.overlays.pinned
+  #];
+
+  # 2. Panggil Kernel BORE LTO v3
+  #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
+  
   # Mengunci & me-override paket kernel LTS
   # =========================================================================
   # 1. RACIKAN KERNEL TKG-BORE LTS 6.6 (LLVM / ThinLTO / x86-64-v3)
@@ -777,32 +798,14 @@
   #  enable = true;
   #};
 
-  services.scx.enable = true;
-  services.scx.scheduler = "scx_bpfland";
+  #services.scx.enable = true;
+  #services.scx.scheduler = "scx_bpfland";
 
   zramSwap = {
     enable = true;
     algorithm = "zstd";
     memoryPercent = 50; # Pakai alokasi max 50% dari total RAM fisik kamu
   };
-
-  #{
-  #  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  #  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-  #}
-
-  #nix.settings = {
-  #  substituters = [ 
-  #    "https://cache.nixos.org" 
-  #    "https://attic.xuyh0120.win/lantian" 
-  #  ];
-  #  trusted-public-keys = [ 
-  #    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-  #    "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" 
-  #  ];
-  #};
-  # --------------------------------------
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

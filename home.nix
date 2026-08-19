@@ -26,11 +26,6 @@
     interactiveShellInit = ''
       set fish_greeting "" # Matikan pesan greeting pembuka bawaan Fish
 
-      set random_img (random choice /etc/nixos/genshin-chibis/*.png)
-      if test -f "$random_img"
-          chafa --size=20x20 $random_img
-      end
-
       function turbo
         echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
         $argv
@@ -38,6 +33,10 @@
       end
     '';
   };# kitty +kitten icat --place 20x20@0x0 "$random_img"
+    # set random_img (random choice /etc/nixos/genshin-chibis/*.png)
+    #   if test -f "$random_img"
+    #       chafa --size=20x20 $random_img
+    #   end
   
 
   programs.starship = {

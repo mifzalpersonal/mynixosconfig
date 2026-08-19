@@ -17,19 +17,10 @@
 
   };
 
-  outputs =
+  outputs ={ self, nixpkgs , home-manager , chaotic , ... } @inputs: #qylock
     {
-      self,
-      nixpkgs,
-      home-manager,
-      #qylock,
-      chaotic,
-      ...
-    }@inputs:
-    {
-      nixosConfigurations = {
-        nix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+      nixosConfigurations = { nix = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             #qylock.nixosModules.default
@@ -85,6 +76,7 @@
             ./configuration.nix
             ./noctalia.nix
             chaotic.nixosModules.default # IMPORTANT
+            
 
             home-manager.nixosModules.home-manager
             {
