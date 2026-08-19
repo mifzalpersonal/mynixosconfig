@@ -720,6 +720,58 @@
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
+  # Mengunci & me-override paket kernel LTS
+  # =========================================================================
+  # 1. RACIKAN KERNEL TKG-BORE LTS 6.6 (LLVM / ThinLTO / x86-64-v3)
+  # =========================================================================
+  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6.extend (self: super: {
+  #  kernel = super.kernel.override {
+  #    # Compiler LLVM / Clang
+  #    stdenv = pkgs.llvmPackages_latest.stdenv;
+  #    
+  #    structuredExtraConfig = with lib.kernel; {
+  #      # BORE Scheduler
+  #      SCHED_BORE = yes;
+  #      
+  #      # CPU Microarchitecture Tuning (Target Intel Gen 8 / Core2)
+  #      MCORE2 = yes;
+  #      GENERIC_CPU = no;
+  #      
+  #      # ThinLTO Optimization
+  #      LTO_NONE = no;
+  #      LTO_CLANG_THIN = yes;
+  #      
+  #      # Low-Latency & Input Speed (Full Preemption + 1000Hz)
+  #      PREEMPT_SERVER = no;
+  #      PREEMPT_RT = no;
+  #      PREEMPT = lib.mkForce yes;
+  #      HZ_1000 = yes;
+  #      
+  #      # Gaming & Syscall Sync (Futex2 / Fsync)
+  #      FUTEX = yes;
+  #      FUTEX_PI = yes;
+  #      
+  #      # Google BBR Network Speedup
+  #      TCP_CONG_BBR = yes;
+  #      DEFAULT_BBR = yes;
+  #    };
+  #
+  #    # Patch BORE Resmi CachyOS / TKG buat LTS 6.6
+  #    kernelPatches = super.kernel.kernelPatches ++ [
+  #      {
+  #        name = "bore-cachy-patch";
+  #        patch = pkgs.fetchpatch {
+  #          #url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.6/0001-bore-cachy.patch";
+  #          #url = "https://raw.githubusercontent.com/CachyOS/kernel-patches/master/6.6/bore/0001-bore-cachy.patch";
+  #          #url = "https://raw.githubusercontent.com/fireburn/survivor-kernel-patches/main/6.6/0001-bore-cachy.patch";
+  #          sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Auto-fix pas pertama build
+  #        };
+  #      }
+  #    ];
+  #  };
+  #});
+
+
 
   #services.scx = {
   #  enable = true;
