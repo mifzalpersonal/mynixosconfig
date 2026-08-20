@@ -31,12 +31,25 @@
         $argv
         echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
       end
+
+      
     '';
   };# kitty +kitten icat --place 20x20@0x0 "$random_img"
     # set random_img (random choice /etc/nixos/genshin-chibis/*.png)
     #   if test -f "$random_img"
     #       chafa --size=20x20 $random_img
     #   end
+
+     #function pinging
+     #while true
+     #  if curl -sI --max-time 5 http://connectivitycheck.gstatic.com/generate_204 
+     #      echo "[(date +'%H:%M:%S')] Keep-alive sent"
+     #  else
+     #      echo "[(date +'%H:%M:%S')] Failed"
+     #  end
+     #  sleep 180
+     #end
+
   
 
   programs.starship = {
