@@ -72,7 +72,7 @@ style = "bg:8"
 format = '[[  $time ](fg:15 bg:8)]($style)'
 
 [os.symbols]
-NixOS = ""     # Symbol NixOS
+NixOS = "󰣇"     # Symbol NixOS
 #NixOS = ""      Symbol NixOS
 Windows = "󰍲"
 Ubuntu = "󰕈"
