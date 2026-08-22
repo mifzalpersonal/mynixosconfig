@@ -163,9 +163,6 @@ home.sessionVariables = {
     # Memaksa SEMUA aplikasi Java Swing/AWT (Ghidra, Burp, NetBeans, dll) 
     # pake kompatibilitas XWayland tanpa bikin window transparan/blank.
     _JAVA_AWT_WM_NONREPARENTING = "1";
-    
-    # Memaksa toolkit GTK tua (yang belum support Wayland) otomatis lari ke X11
-    # Tanpa merusak aplikasi GTK4 modern yang udah native Wayland.
   };
 
 #xdg.configFile."fastfetch/config.jsonc".text = builtins.readFile ./config/fastfetch/config.jsonc;
