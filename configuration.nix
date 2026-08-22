@@ -484,6 +484,7 @@
      helix
      wayvnc
      zeal
+     kdePackages.kdenlive
     # --------
 
     #(wrapOBS {
