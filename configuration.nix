@@ -27,7 +27,7 @@
     "udev.log_priority=4"
 
     "i915.enable_guc=3"   # Enable GuC submission & HuC loading (Offload scheduler ke GPU)
-    "i915.enable_psr=0"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
+    "i915.enable_psr=1"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
     "i915.fastboot=1"     # Seamless boot transition
 
     "i915.modeset=1" # Memaksa driver VGA Intel buat langsung nge-handle layar sejak di dalam initrd.
