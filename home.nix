@@ -27,9 +27,15 @@
       set fish_greeting "" # Matikan pesan greeting pembuka bawaan Fish
 
       function turbo
+      
         echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+        echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
+      
         $argv
+        
+        echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
         echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+      
       end
 
       

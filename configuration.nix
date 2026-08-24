@@ -545,7 +545,7 @@
     ls = "eza --icons --group-directories-first";
     ll = "eza -l --icons --group-directories-first";
     tree = "eza --tree --icons";
-    cat = "bat";
+    bcat = "bat";
     cd = "z";
     roblox = "flatpak run --env=GTK_THEME=Adwaita --env=GDK_BACKEND=x11 org.vinegarhq.Sober";
     kipas = "cat /proc/acpi/ibm/fan";
@@ -669,7 +669,7 @@
     isNormalUser = true;
     description = "ciel";
     shell = pkgs.fish; # <-- TAMBAHKAN BARIS INI!
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render"];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render" "wireshark"];
   };
 
   systemd.services."home-manager-ciel" = {
