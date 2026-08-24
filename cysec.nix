@@ -18,6 +18,11 @@ environment.systemPackages = with pkgs; [
     burpsuite
     arp-scan
     aircrack-ng
+    gobuster
+    nikto
+    ffuf
+    git-dumper
+    macchanger
   ];
 
 
