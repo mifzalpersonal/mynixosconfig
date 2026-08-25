@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod" "thinkpad_acpi" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "uas" "usb_storage" "sd_mod" "thinkpad_acpi" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModprobeConfig = ''
@@ -17,11 +17,11 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c9dfa6e8-4c1d-4794-a18d-b586c331f19e";
+    { device = "/dev/disk/by-uuid/76be98bc-2d0e-4654-8998-8cfad264d6c3";
       fsType = "btrfs";
       options = [
         "noatime"
-        "compress=zstd"
+        "compress=zstd:1"
         "space_cache=v2"
         "ssd"
         "discard=async"

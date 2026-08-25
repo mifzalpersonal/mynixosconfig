@@ -17,11 +17,11 @@
     intelephense                  # PHP LSP paling stabil buat Laravel
     blade-formatter               # Formatter file .blade.php
 
-    cargo
-    rustc
-    rustfmt
-    clippy
-    rust-analyzer
+    #cargo
+    #rustc
+    #rustfmt
+    #clippy
+    #rust-analyzer
 
     # Utilities & C Libraries untuk Kompilasi
     pkg-config
