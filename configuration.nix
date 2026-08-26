@@ -856,7 +856,7 @@
   zramSwap = {
     enable = true;
     algorithm = "zstd";
-    memoryPercent = 50; # Pakai alokasi max 50% dari total RAM fisik kamu
+    memoryPercent = 70; # Pakai alokasi max 50% dari total RAM fisik kamu
   };
 
   # Some programs need SUID wrappers, can be configured further or are
