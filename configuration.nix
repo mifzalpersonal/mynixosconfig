@@ -21,18 +21,42 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
-    #"quiet"                          # Sembunyikan pesan booting bawaan
-    #"splash"                         # Tampilan booting bersih
-    "loglevel=4"                     # Cuma tampilkan log error penting
-    #"rd.systemd.show_status=false"   # Matikan teks status systemd di initrd
+    "quiet"                        
+    #"splash"                       
+    "loglevel=3"               
+
+    "systemd.show_status=auto"     # Hanya tunjukkan status jika ada service error/hanging
+    "rd.systemd.show_status=false"
+
     "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
 
-    "rd.udev.log_level=4"
-    "udev.log_priority=4"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
 
     "i915.enable_psr=1"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
-    #"i915.fastboot=1"     # Seamless boot transition
+    "i915.fastboot=1"     # Seamless boot transition
 
+    # FIX: Matikan probing serial port jadul 8250 (Eliminasi delay 5.5s ttyS0-S3)
+    "8250.nr_uarts=0"
+
+    # FIX: Nonaktifkan module TPM untuk memangkas delay initialization ~5.5s
+    "tpm_tis.disable=1"
+
+    # OPTIMASI BOOT DRIVE: Probing device SATA/SD Card secara asinkron (Eliminasi delay sda/sdb)
+    "scsi_mod.use_blk_mq=1"
+    "async_probe=all"
+  ];
+
+  boot.blacklistedKernelModules = [
+    "tpm"
+    "tpm_crb"
+    "tpm_tis"
+    "tpm_tis_core"
+    "rtsx_usb"
+    "rtsx_usb_sdmmc"
+    "rtsx_usb_ms"
+    "rtsx_pci"
+    "rtsx_pci_sdmmc"
   ];
 
   #------------------THE START OF PLYMOMUHT---------------------
@@ -48,13 +72,37 @@
   #};
   #
   ## 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
-  boot.consoleLogLevel = 3;
-  boot.initrd.verbose = false;
-  boot.initrd.kernelModules = [ "i915" ];
+  
+  boot.consoleLogLevel = 0;
+  
+  boot.initrd = {
+    systemd.enable = true;      # Wajib! Aktifkan systemd di stage 1 initrd biar ngebut
+    compressor = "zstd";         # Gunakan zstd decompressor super cepat
+    
+    includeDefaultModules = false; # Matikan modul bawaan yang tidak terpakai
+
+    kernelModules = [ 
+      "ahci"        # Controller SATA buat SSD kamu (dev-sda)
+      "sd_mod"      # Driver SCSI/SATA disk
+      "btrfs"        # Filesystem root kamu (sesuaikan jika pakai btrfs/zfs)
+      "i915"        # Early KMS display (tetap dipakai buat seamless boot)
+    ];  
+
+    verbose = false;
+  };
+
+  boot.initrd.compressorArgs = [ "-1" "--fast" ]; # Decompress jauh lebih cepat saat boot
 
   #------------------THE END OF PLYMOMUHT---------------------
 
   
+  #apparently its home manager
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+
+  systemd.services.home-manager-ciel = {
+    wantedBy = lib.mkForce [ "default.target" ];
+  };
 
   
 
@@ -110,7 +158,7 @@
       # Enable all controllers when they are found. This includes
       # adapters present on start as well as adapters that are plugged
       # in later on. Defaults to 'true'.
-      AutoEnable = true;
+      AutoEnable = false;
       };
     };
   };
@@ -175,8 +223,8 @@
 
 
   # Enable the GNOME Desktop Environment.
-  #services.displayManager.ly.enable = true;
-  services.displayManager.gdm.enable = true;
+  services.displayManager.ly.enable = true;
+  #services.displayManager.gdm.enable = true;
   #services.desktopManager.gnome.enable = false;
   #services.gnome.core-apps.enable = false;
   #services.gnome.core-developer-tools.enable = false;

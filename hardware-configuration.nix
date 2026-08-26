@@ -8,7 +8,14 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod" "thinkpad_acpi" ];
+  boot.initrd.availableKernelModules = [ 
+    "xhci_pci" 
+    "ahci" 
+    "usb_storage" 
+    "sd_mod" 
+    "thinkpad_acpi" 
+  ];
+  
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModprobeConfig = ''
