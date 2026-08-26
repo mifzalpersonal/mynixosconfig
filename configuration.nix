@@ -14,7 +14,11 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  
+  boot.loader.timeout = 0;
+
   boot.loader.efi.canTouchEfiVariables = true;
+
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
     #"quiet"                          # Sembunyikan pesan booting bawaan
@@ -26,11 +30,9 @@
     "rd.udev.log_level=4"
     "udev.log_priority=4"
 
-    "i915.enable_guc=3"   # Enable GuC submission & HuC loading (Offload scheduler ke GPU)
     "i915.enable_psr=1"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
-    "i915.fastboot=1"     # Seamless boot transition
+    #"i915.fastboot=1"     # Seamless boot transition
 
-    "i915.modeset=1" # Memaksa driver VGA Intel buat langsung nge-handle layar sejak di dalam initrd.
   ];
 
   #------------------THE START OF PLYMOMUHT---------------------
@@ -46,8 +48,8 @@
   #};
   #
   ## 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
-  boot.consoleLogLevel = 4;
-  boot.initrd.verbose = true;
+  boot.consoleLogLevel = 3;
+  boot.initrd.verbose = false;
   boot.initrd.kernelModules = [ "i915" ];
 
   #------------------THE END OF PLYMOMUHT---------------------
@@ -80,14 +82,17 @@
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   services.cloudflare-warp.enable = true;
+  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [];
+
   services.tailscale.enable = true;
+  systemd.services.tailscaled.wantedBy = lib.mkForce [];
+  
 
   programs.wayvnc.enable = true; 
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
-  services.blueman.enable = true;
   hardware.bluetooth = {
   enable = true;
   powerOnBoot = false;
@@ -95,11 +100,11 @@
     General = {
       # Shows battery charge of connected devices on supported
       # Bluetooth adapters. Defaults to 'false'.
-      Experimental = true;
+      #Experimental = true;
       # When enabled other devices can connect faster to us, however
       # the tradeoff is increased power consumption. Defaults to
       # 'false'.
-      FastConnectable = true;
+      #FastConnectable = true;
     };
     Policy = {
       # Enable all controllers when they are found. This includes
@@ -501,6 +506,7 @@
     enable = true;
     package = pkgs.mariadb;
   };
+  systemd.services.mysql.wantedBy = lib.mkForce [];
 
   services.flatpak.enable = true;
 
@@ -510,7 +516,7 @@
   };
 
   services.ollama = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     port = 11434;
   };
@@ -673,11 +679,7 @@
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render" "wireshark"];
   };
 
-  systemd.services."home-manager-ciel" = {
-    wantedBy = lib.mkForce [ "multi-user.target" ];
-    before = lib.mkForce [ ];
-  };
-
+  
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
