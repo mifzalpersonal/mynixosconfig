@@ -23,6 +23,7 @@ environment.systemPackages = with pkgs; [
     ffuf
     git-dumper
     macchanger
+    tcpdump
   ];
 
 

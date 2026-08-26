@@ -61,9 +61,9 @@
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.scanRandMacAddress = true;
-  networking.networkmanager.ethernet.macAddress = "random";
-  networking.networkmanager.wifi.macAddress = "random";
+  networking.networkmanager.wifi.scanRandMacAddress = false;
+  networking.networkmanager.ethernet.macAddress = "preserve";
+  networking.networkmanager.wifi.macAddress = "preserve";
   #networking.networkmanager.settings = {
     
     # dhcp = {
