@@ -45,7 +45,16 @@
     # OPTIMASI BOOT DRIVE: Probing device SATA/SD Card secara asinkron (Eliminasi delay sda/sdb)
     "scsi_mod.use_blk_mq=1"
     "async_probe=all"
+
+    # Aktifkan PCIe Active State Power Management (ASPM) secara agresif
+    "pcie_aspm=force"
+
+    # Fitur hemat daya khusus GPU Intel UHD 620
+    "i915.enable_dc=2"
+    "i915.enable_fbc=1"
   ];
+
+  powerManagement.powertop.enable = true;
 
   boot.blacklistedKernelModules = [
     "tpm"
@@ -293,6 +302,12 @@
 
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
+
+      # --- AUDIO POWER SAVE ---
+      # 0 = Mati (AC/Charger), 1 = Aktif (BAT/Baterai)
+      SOUND_POWER_SAVE_ON_AC = 0;
+      SOUND_POWER_SAVE_ON_BAT = 1;
+      SOUND_POWER_SAVE_CONTROLLER = "Y"; # Paksa controller audio tidur pas baterai
 
       # ==========================================
       # POWER LIMIT SETUP KHUSUS INTEL (TLP)
