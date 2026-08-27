@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: #caelestia
+{ config, pkgs, inputs,  ... }: #caelestia
 
 {
   home.username = "ciel";
@@ -6,10 +6,12 @@
 
   # Sinkron dengan stateVersion di configuration.nix lu
   home.stateVersion = "25.11"; 
+  
 
   fonts.fontconfig.enable = true;
   # Tempat naruh aplikasi khusus user lu nanti
-  home.packages = with pkgs; [
+  home.packages = [
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.git = {

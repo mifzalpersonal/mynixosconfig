@@ -9,7 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia/legacy-v4";
+      url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -74,7 +74,6 @@
 
             #-----------------
             ./configuration.nix
-            ./noctalia.nix
             chaotic.nixosModules.default # IMPORTANT
             
 
@@ -83,6 +82,9 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup"; # <-- Tambahkan baris ini!
+
+              # TAMBAHKAN BARIS INI:
+              home-manager.extraSpecialArgs = { inherit inputs; };
 
               home-manager.users.ciel = import ./home.nix;
             }
