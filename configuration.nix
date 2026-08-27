@@ -293,12 +293,12 @@
       CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       
-      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_BAT = 1;
       CPU_BOOST_ON_AC = 1;
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";

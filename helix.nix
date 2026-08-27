@@ -17,8 +17,8 @@
     intelephense                  # PHP LSP paling stabil buat Laravel
     blade-formatter               # Formatter file .blade.php
 
-    #cargo
-    #rustc
+    cargo
+    rustc
     #rustfmt
     #clippy
     #rust-analyzer

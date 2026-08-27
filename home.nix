@@ -25,20 +25,6 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting "" # Matikan pesan greeting pembuka bawaan Fish
-
-      function turbo
-      
-        echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
-        echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
-      
-        $argv
-        
-        echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
-        echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
-      
-      end
-
-      
     '';
   };# kitty +kitten icat --place 20x20@0x0 "$random_img"
     # set random_img (random choice /etc/nixos/genshin-chibis/*.png)
@@ -54,6 +40,18 @@
      #      echo "[(date +'%H:%M:%S')] Failed"
      #  end
      #  sleep 180
+     #end
+
+     #function turbo
+     #
+     #  echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+     #  echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
+     #
+     #  $argv
+     #  
+     #  echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
+     #  echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+     #
      #end
 
   
