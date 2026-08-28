@@ -81,6 +81,12 @@
   #Inisialisasi ekstra untuk Zsh (termasuk fungsi kustom dari Fish sebelumnya)
   initContent = ''
 
+    # Aktifkan auto-completion tanpa mempedulikan huruf besar/kecil (case-insensitive)
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+    # Inisialisasi pay-respects sebagai 'fuck'
+    eval "$(pay-respects zsh --alias fuck)"
+
     # Matikan error globbing zsh kalau nemu karakter #
     unsetopt nomatch
 

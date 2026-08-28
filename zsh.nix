@@ -8,5 +8,6 @@
     zsh-vi-mode
     zsh-you-should-use
     zsh-forgit
+    pay-respects
   ];
 }

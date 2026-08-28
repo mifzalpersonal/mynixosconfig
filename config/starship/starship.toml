@@ -4,7 +4,7 @@
 add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+format = """($nix_shell$container$directory $cmd_duration$fill$git_metrics\n)\
 $hostname\
 $localip\
 $shlvl\
@@ -18,7 +18,6 @@ $character"""
 right_format = """
 $singularity\
 $kubernetes\
-$directory\
 $vcsh\
 $fossil_branch\
 $git_branch\
@@ -98,9 +97,9 @@ symbol = ' '
 
 [character]
 format = "$symbol "
-success_symbol = "[◎](bold italic bright-yellow)"
-error_symbol = "[○](italic purple)"
-vimcmd_symbol = "[■](italic dimmed green)"
+success_symbol = "[❯](bold bright-yellow)"
+error_symbol = "[✘](purple)"
+vimcmd_symbol = "[■](dimmed green)"
 # not supported in zsh
 vimcmd_replace_one_symbol = "◌"
 vimcmd_replace_symbol = "□"
@@ -112,8 +111,8 @@ style = 'green italic'
 
 [sudo]
 format = "[$symbol]($style)"
-style = "bold italic bright-purple"
-symbol = "⋈┈"
+style = "bold bright-purple"
+symbol = "◈"
 disabled = false
 
 [username]
@@ -124,9 +123,9 @@ disabled = false
 show_always = false
 
 [directory]
-home_symbol = "⌂"
-truncation_length = 2
-truncation_symbol = "□ "
+home_symbol = "~"
+truncation_length = 0
+truncation_symbol = "…/ "
 read_only = " ◈"
 use_os_path_sep = true
 style = "italic blue"
@@ -135,7 +134,7 @@ repo_root_style = 'bold blue'
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'
 
 [cmd_duration]
-format = "[◄ $duration ](italic white)"
+format = "[$duration ](italic white)"
 
 [jobs]
 format = "[$symbol$number]($style) "
