@@ -23,48 +23,96 @@
     };
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting "" # Matikan pesan greeting pembuka bawaan Fish
-    '';
-  };# kitty +kitten icat --place 20x20@0x0 "$random_img"
-    # set random_img (random choice /etc/nixos/genshin-chibis/*.png)
-    #   if test -f "$random_img"
-    #       chafa --size=20x20 $random_img
-    #   end
+  # Enable Zsh & Plugins
+  programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  autosuggestion.enable = true;
+  syntaxHighlighting.enable = true;
+  completionInit = "autoload -U compinit && compinit -u";
 
-     #function pinging
-     #while true
-     #  if curl -sI --max-time 5 http://connectivitycheck.gstatic.com/generate_204 
-     #      echo "[(date +'%H:%M:%S')] Keep-alive sent"
-     #  else
-     #      echo "[(date +'%H:%M:%S')] Failed"
-     #  end
-     #  sleep 180
-     #end
+  # Memuat plugin tambahan langsung dari Nixpkgs
+  plugins = with pkgs; [
+    {
+       name = "fzf-tab";
+       src = "${zsh-fzf-tab}/share/fzf-tab";
+     }
+     {
+       name = "zsh-vi-mode";
+       src = "${zsh-vi-mode}/share/zsh-vi-mode";
+     }
+     {
+       name = "zsh-you-should-use";
+       src = "${zsh-you-should-use}/share/zsh-you-should-use";
+     }
+     {
+       name = "forgit";
+       src = "${zsh-forgit}/share/zsh-forgit";
+     }
+     {
+       name = "zsh-expand";
+       src = pkgs.fetchFromGitHub {
+         owner = "MenkeTechnologies";
+         repo = "zsh-expand";
+         rev = "master";
+         hash = "sha256-fyHYAitwT8VSwdc4U2WcwjW9iNCT+8u57ndGeygP1JE="; # Nix bakal pancing hash resminya pas 'rb'
+       };
+     }
+     {
+       name = "zsh-auto-notify";
+       src = pkgs.fetchFromGitHub {
+         owner = "MichaelAquilina";
+         repo = "zsh-auto-notify";
+         rev = "master";
+         hash = "sha256-s3TBAsXOpmiXMAQkbaS5de0t0hNC1EzUUb0ZG+p9keE="; # Nix bakal pancing hash resminya pas 'rb'
+       };
+     }
+     {
+       name = "evalcache";
+       src = pkgs.fetchFromGitHub {
+         owner = "mroth";
+         repo = "evalcache";
+         rev = "v1.0.3"; # atau branch "master"
+         hash = "sha256-CN9dnSt9kc5AEkWnbtjyv+DCQZ08Ifmac5wELqve17U="; # Salin hash resmi dari error log saat 'rb'
+       };
+     }
+  ];
 
-     #function turbo
-     #
-     #  echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
-     #  echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
-     #
-     #  $argv
-     #  
-     #  echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
-     #  echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
-     #
-     #end
+  #Inisialisasi ekstra untuk Zsh (termasuk fungsi kustom dari Fish sebelumnya)
+  initContent = ''
 
+    # Matikan error globbing zsh kalau nemu karakter #
+    unsetopt nomatch
+
+    # Matikan peringatan compfix Zsh
+    ZSH_DISABLE_COMPFIX="true"
+
+    # --- CONFIGURATION FOR AUTO-NOTIFY ---
+    # Batas waktu (dalam detik) sebelum notifikasi dikirim untuk proses lama
+    AUTO_NOTIFY_THRESHOLD=10
+    
+    # --- EVALCACHE (Mempercepat load Starship & Zoxide) ---
+    _evalcache starship init zsh
+    _evalcache zoxide init zsh
+
+    # Fungsi Turbo dari Fish kamu yang di-porting ke Zsh/POSIX
+    turbo() {
+      echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+      echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
+      "$@"
+      echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference   
+      echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+    }
+  '';
+};
   
-
   programs.starship = {
     enable = true;
   };
 
   programs.kitty = {
     enable = true;
-    shellIntegration.enableFishIntegration = true;
+    shellIntegration.enableZshIntegration = true;
     #font = {
     #    name = "Monocraft";
     #};
@@ -98,13 +146,13 @@
   # Integrasi Zoxide (pengganti 'cd' yang cerdas)
   programs.zoxide = {
     enable = true;
-    enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   # Integrasi FZF (fuzzy finder buat nyari file/history super cepat)
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
+    enableZshIntegration = true;
   };
 
   home.pointerCursor = {

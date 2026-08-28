@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./helix.nix
       ./cysec.nix
+      ./zsh.nix
     ];
 
     
@@ -637,7 +638,7 @@
     enable = true; 
   };
 
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   services.tumbler.enable = true;
   
@@ -740,7 +741,7 @@
   users.users.ciel = {
     isNormalUser = true;
     description = "ciel";
-    shell = pkgs.fish; # <-- TAMBAHKAN BARIS INI!
+    shell = pkgs.zsh; # <-- TAMBAHKAN BARIS INI!
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render" "wireshark"];
   };
 
