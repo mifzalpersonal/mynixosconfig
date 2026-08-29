@@ -504,7 +504,7 @@
 
      cava
      xwayland-satellite #its for xxwayland so steam can run
-     bazaar
+     warehouse
      ollama
      obsidian
      #ani-cli
