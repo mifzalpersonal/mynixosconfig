@@ -2,42 +2,46 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./helix.nix
-      ./cysec.nix
-      ./zsh.nix
-    ];
-
-    
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./helix.nix
+    ./cysec.nix
+    ./zsh.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  
+
   boot.loader.timeout = 0;
 
   boot.loader.efi.canTouchEfiVariables = true;
 
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
-    "quiet"                        
-    #"splash"                       
-    "loglevel=3"               
+    "quiet"
+    #"splash"
+    "loglevel=3"
 
-    "systemd.show_status=auto"     # Hanya tunjukkan status jika ada service error/hanging
+    "systemd.show_status=auto" # Hanya tunjukkan status jika ada service error/hanging
     "rd.systemd.show_status=false"
 
-    "boot.shell_on_fail"             # Tetap sediakan emergency shell kalau error parah
+    "boot.shell_on_fail" # Tetap sediakan emergency shell kalau error parah
 
     "rd.udev.log_level=3"
     "udev.log_priority=3"
 
-    "i915.enable_psr=1"   # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
-    "i915.fastboot=1"     # Seamless boot transition
+    "i915.enable_psr=1" # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
+    "i915.fastboot=1" # Seamless boot transition
 
     # FIX: Matikan probing serial port jadul 8250 (Eliminasi delay 5.5s ttyS0-S3)
     "8250.nr_uarts=0"
@@ -75,7 +79,7 @@
   #boot.plymouth = {
   #  enable = true;
   #  theme = "catppuccin-macchiato"; # Pilihan: catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-  #  
+  #
   #  themePackages = [
   #    (pkgs.catppuccin-plymouth.override {
   #      variant = "macchiato"; # Samakan varian warnanya di sini
@@ -84,30 +88,32 @@
   #};
   #
   ## 1. Bikin Booting SANGAT Silent (Sembunyiin Teks Log Systemd)
-  
+
   boot.consoleLogLevel = 0;
-  
+
   boot.initrd = {
-    systemd.enable = true;      # Wajib! Aktifkan systemd di stage 1 initrd biar ngebut
-    compressor = "zstd";         # Gunakan zstd decompressor super cepat
-    
+    systemd.enable = true; # Wajib! Aktifkan systemd di stage 1 initrd biar ngebut
+    compressor = "zstd"; # Gunakan zstd decompressor super cepat
+
     includeDefaultModules = false; # Matikan modul bawaan yang tidak terpakai
 
-    kernelModules = [ 
-      "ahci"        # Controller SATA buat SSD kamu (dev-sda)
-      "sd_mod"      # Driver SCSI/SATA disk
-      "btrfs"        # Filesystem root kamu (sesuaikan jika pakai btrfs/zfs)
-      "i915"        # Early KMS display (tetap dipakai buat seamless boot)
-    ];  
+    kernelModules = [
+      "ahci" # Controller SATA buat SSD kamu (dev-sda)
+      "sd_mod" # Driver SCSI/SATA disk
+      "btrfs" # Filesystem root kamu (sesuaikan jika pakai btrfs/zfs)
+      "i915" # Early KMS display (tetap dipakai buat seamless boot)
+    ];
 
     verbose = false;
   };
 
-  boot.initrd.compressorArgs = [ "-1" "--fast" ]; # Decompress jauh lebih cepat saat boot
+  boot.initrd.compressorArgs = [
+    "-1"
+    "--fast"
+  ]; # Decompress jauh lebih cepat saat boot
 
   #------------------THE END OF PLYMOMUHT---------------------
 
-  
   #apparently its home manager
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -115,9 +121,6 @@
   systemd.services.home-manager-ciel = {
     wantedBy = lib.mkForce [ "default.target" ];
   };
-
-  
-
 
   networking.hostName = "HIKVISION-NVR"; # Define your hostname.
 
@@ -127,50 +130,52 @@
   networking.networkmanager.ethernet.macAddress = "preserve";
   networking.networkmanager.wifi.macAddress = "preserve";
   #networking.networkmanager.settings = {
-    
-    # dhcp = {
-    #   send-hostname = true;
-    # };
 
-    # connection = {
-    #   "ipv4.dhcp-send-hostname" = "iPhone";
-    #   "ipv6.dhcp-send-hostname" = "iPhone";
-    #   "ethernet.cloned-mac-address" = "A4:D1:8C:11:22:33";
-    #   "wifi.cloned-mac-address" = "A4:D1:8C:44:55:66";
-    # };
+  # dhcp = {
+  #   send-hostname = true;
+  # };
+
+  # connection = {
+  #   "ipv4.dhcp-send-hostname" = "iPhone";
+  #   "ipv6.dhcp-send-hostname" = "iPhone";
+  #   "ethernet.cloned-mac-address" = "A4:D1:8C:11:22:33";
+  #   "wifi.cloned-mac-address" = "A4:D1:8C:44:55:66";
+  # };
   #};
 
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
   services.cloudflare-warp.enable = true;
-  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [];
+  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [ ];
 
   services.tailscale.enable = true;
-  systemd.services.tailscaled.wantedBy = lib.mkForce [];
-  
+  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
 
-  programs.wayvnc.enable = true; 
+  programs.wayvnc.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
   hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = false;
-  settings = {
-    General = {
-      # Shows battery charge of connected devices on supported
-      # Bluetooth adapters. Defaults to 'false'.
-      #Experimental = true;
-      # When enabled other devices can connect faster to us, however
-      # the tradeoff is increased power consumption. Defaults to
-      # 'false'.
-      #FastConnectable = true;
-    };
-    Policy = {
-      # Enable all controllers when they are found. This includes
-      # adapters present on start as well as adapters that are plugged
-      # in later on. Defaults to 'true'.
-      AutoEnable = false;
+    enable = true;
+    powerOnBoot = false;
+    settings = {
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        #Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        #FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = false;
       };
     };
   };
@@ -182,7 +187,6 @@
     "net.ipv4.ip_default_ttl" = 65;
     "net.ipv6.conf.all.hop_limit" = 65;
 
-
     # Tells kernel to swap aggressively to zRAM before touching SSD
     "vm.swappiness" = 180;
     # Mandatory for zRAM: processes 1 page (4KB) at a time instead of 16KB clusters
@@ -190,10 +194,8 @@
     # Prevents unnecessary page cache dropping when swapping
     "vm.vfs_cache_pressure" = 100;
 
-
     # MGLRU Optimization (Pemindaian memori presisi)
     "vm.lru_gen_config" = 3;
-
 
     # BBR TCP Congestion Control
     "net.core.default_qdisc" = "fq";
@@ -210,7 +212,6 @@
   # 2. Load Kernel Module untuk BBR
   boot.kernelModules = [ "tcp_bbr" ];
   #----------------OPTIMIZATIONNNNN-----------------------------
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -233,7 +234,6 @@
   #services.xserver.windowManager.openbox.enable = true;
   programs.xwayland.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.displayManager.ly.enable = true;
   #services.displayManager.gdm.enable = true;
@@ -243,17 +243,16 @@
   #services.gnome.games.enable = false;
 
   environment.variables = {
-     GSK_RENDERER = "gl";
-     XCURSOR_THEME = "Bibata-Modern-Classic";
-     XCURSOR_SIZE = "16";
+    GSK_RENDERER = "gl";
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "16";
   };
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
-  
-  # services.displayManager.defaultSession = "xfce";
 
+  # services.displayManager.defaultSession = "xfce";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -263,11 +262,11 @@
   # OR
   security.rtkit.enable = true;
   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
-   };
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -288,14 +287,14 @@
       # Mulai ngecas kalau batre di bawah 75%, stop ngecas di 80%
       START_CHARGE_THRESH_BAT0 = 95;
       STOP_CHARGE_THRESH_BAT0 = 98;
-      
+
       # Karena T480 punya dual battery (Bridge Battery System), atur juga BAT1
       START_CHARGE_THRESH_BAT1 = 75;
       STOP_CHARGE_THRESH_BAT1 = 80;
 
-      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance 
+      CPU_SCALING_GOVERNOR_ON_AC = "powersave"; # Atau performance
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      
+
       CPU_BOOST_ON_BAT = 1;
       CPU_BOOST_ON_AC = 1;
 
@@ -316,14 +315,14 @@
       # POWER LIMIT SETUP KHUSUS INTEL (TLP)
       # ==========================================
       # Saat dicolok Charger (AC): Kasih napas lega
-       
+
       # PLATFORM_POWER_LIMIT_1_TIME_ON_AC = 28;
       # PLATFORM_POWER_LIMIT_1_POWER_ON_AC = 20000; # 25 Watt (dalam miliwatt)
       # PLATFORM_POWER_LIMIT_2_TIME_ON_AC = 28;
       # PLATFORM_POWER_LIMIT_2_POWER_ON_AC = 30000; # 35 Watt
-      # 
+      #
       # # Saat Mode BATERAI (BAT): KUNCI DI 10 WATT BIAR GAK DROP!
-      # 
+      #
       # PLATFORM_POWER_LIMIT_1_TIME_ON_BAT = 28;
       # PLATFORM_POWER_LIMIT_1_POWER_ON_BAT = 6000; # 10 Watt max
       # PLATFORM_POWER_LIMIT_2_TIME_ON_BAT = 28;
@@ -355,14 +354,14 @@
   #    PL1_Time_s: 28
   #    PL2_Power_W: 30
   #    PL2_Time_s: 0.002
-#
+  #
   #    [UNDERVOLT.BATTERY]
   #    CORE: -100
   #    GPU: -25
   #    CACHE: -90
   #    UNCORE: -25
   #    ANALOGIO: 0
-#
+  #
   #    [UNDERVOLT.AC]
   #    CORE: -100
   #    GPU: -25
@@ -371,7 +370,7 @@
   #    ANALOGIO: 0
   #  '';
   #};
-  
+
   #services.thinkfan = {
   #  enable = true;
   #  levels = [
@@ -394,10 +393,10 @@
   services.gvfs.enable = true;
 
   environment.sessionVariables = {
-    
+
     # Paksa semua app GTK3/GTK4 pakai Dark Theme
     GTK_THEME = "catppuccin-mocha-blue-standard";
-  
+
     # Aktifkan fitur modern Thunar (thumbnail & preview)
     #GDK_BACKEND = "wayland,x11";
 
@@ -406,7 +405,7 @@
   };
   # programs.firefox.enable = true;
   #programs.hyprland.enable = true;
-  
+
   programs.niri.enable = true;
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -417,147 +416,148 @@
     zlib
   ];
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     neovim
-     gcc
-     tree-sitter        # CLI Tree-sitter
-     ripgrep
-     fd
-     lazygit
-     fzf
-     thunar-archive-plugin  # Klik kanan -> Extract / Compress
-     thunar-volman        # Auto mount USB / Flashdisk
-     brightnessctl
-     nh
-     unzip
-     p7zip
-     unrar
-     
-     # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
-     tumbler                     # Engine preview gambar
-     ffmpegthumbnailer           # Preview video
-     poppler-utils               # Preview PDF
-     file-roller                 # App GUI pendukung ekstraksi zip
-     xfconf
-     libnotify
-     
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    neovim
+    gcc
+    tree-sitter # CLI Tree-sitter
+    ripgrep
+    fd
+    lazygit
+    fzf
+    thunar-archive-plugin # Klik kanan -> Extract / Compress
+    thunar-volman # Auto mount USB / Flashdisk
+    brightnessctl
+    nh
+    unzip
+    p7zip
+    unrar
+
+    # Thumbnail generator (Biar gambar, video, & PDF keliatan gambarnya)
+    tumbler # Engine preview gambar
+    ffmpegthumbnailer # Preview video
+    poppler-utils # Preview PDF
+    file-roller # App GUI pendukung ekstraksi zip
+    xfconf
+    libnotify
+
     #python pip
-    (python3.withPackages (ps: with ps; [
-      pygobject3
-    ]))
+    (python3.withPackages (
+      ps: with ps; [
+        pygobject3
+      ]
+    ))
     gobject-introspection
 
-     #larp
-     btop
-     fastfetch
-     yazi
-     tty-clock
-     pipes
-     lavat
-     eza
-     bat
-     s-tui
-     chafa
-     #------
-     
-     
-     brave
-     alacritty
-     kitty
-     steam
-     thunar
-     discord
-     #kdePackages.dolphin
-     niri
-     fuzzel
-     libreoffice-fresh
-     flatpak
-     file
-     obs-studio
-     ventoy-full
-     modprobed-db
-     
-     #sehari hari alias bloat
-     gnome-calculator      # Kalkulator GTK simpel & responsif
-     cheese                # App Kamera (Webcam viewer)
-     gnome-clocks          # Jam, Timer, Stopwatch, Alarm
-     gnome-text-editor     # Text editor GUI ringan
- 
-     # --- GAMING & FUN ---
-     gnome-chess           # Game Catur (vs AI/GNU Chess)
-     gnuchess              # Engine AI catur biar gnome-chess bisa dimainin
-     aisleriot             # Solitaire / Kartu klasik bawaan
- 
-     # --- MEDIA & SYSTEM MANAGEMENT ---
-     loupe                 # Image Viewer modern (replacement EOG di Wayland)
-     evince                # PDF Reader
-     baobab                # Disk Usage Analyzer (buat cek kapasitas SSD)
-     vlc
-     nautilus
-     blueman
-     gparted
+    #larp
+    btop
+    fastfetch
+    yazi
+    tty-clock
+    pipes
+    lavat
+    eza
+    bat
+    s-tui
+    chafa
+    #------
 
-     #mau maen gaming ah
-     ppsspp
-     pcsx2
+    brave
+    alacritty
+    kitty
+    steam
+    thunar
+    discord
+    #kdePackages.dolphin
+    niri
+    fuzzel
+    libreoffice-fresh
+    flatpak
+    file
+    obs-studio
+    ventoy-full
+    modprobed-db
 
-     cava
-     xwayland-satellite #its for xxwayland so steam can run
-     warehouse
-     ollama
-     obsidian
-     #ani-cli
-     ncdu
-     img2pdf
-     imagemagick
-     mangohud
+    #sehari hari alias bloat
+    gnome-calculator # Kalkulator GTK simpel & responsif
+    cheese # App Kamera (Webcam viewer)
+    gnome-clocks # Jam, Timer, Stopwatch, Alarm
+    gnome-text-editor # Text editor GUI ringan
 
+    # --- GAMING & FUN ---
+    gnome-chess # Game Catur (vs AI/GNU Chess)
+    gnuchess # Engine AI catur biar gnome-chess bisa dimainin
+    aisleriot # Solitaire / Kartu klasik bawaan
 
-     #driver checkers
-     intel-gpu-tools
-     mesa-demos
-     vulkan-tools
-     libva-utils
+    # --- MEDIA & SYSTEM MANAGEMENT ---
+    loupe # Image Viewer modern (replacement EOG di Wayland)
+    evince # PDF Reader
+    baobab # Disk Usage Analyzer (buat cek kapasitas SSD)
+    vlc
+    nautilus
+    blueman
+    gparted
 
-     #lib
-     mpv
-     aria2
-     ffmpeg
-     yt-dlp
-     ntfs3g
-     pciutils
-     usbutils
+    #mau maen gaming ah
+    ppsspp
+    pcsx2
+
+    cava
+    xwayland-satellite # its for xxwayland so steam can run
+    warehouse
+    ollama
+    obsidian
+    #ani-cli
+    ncdu
+    img2pdf
+    imagemagick
+    mangohud
+
+    #driver checkers
+    intel-gpu-tools
+    mesa-demos
+    vulkan-tools
+    libva-utils
+
+    #lib
+    mpv
+    mpvpaper
+    aria2
+    ffmpeg
+    yt-dlp
+    ntfs3g
+    pciutils
+    usbutils
 
     #cursor
     bibata-cursors
-    adwaita-icon-theme 
+    adwaita-icon-theme
 
     #project iwnboat
     #labwc
 
     # devs thingy
-     laravel
-     mariadb
-     php
-     nodejs
-     clang
-     python313
-     vscode
-     zed-editor
-     go
-     docker
-     winboat
-     python313Packages.pip
-     llama-cpp
-     aider-chat-full
-     php84
-     php84Packages.composer
-     tmux
-     helix
-     wayvnc
-     zeal
-     kdePackages.kdenlive
+    laravel
+    mariadb
+    php
+    nodejs
+    clang
+    python313
+    vscode
+    zed-editor
+    go
+    docker
+    winboat
+    python313Packages.pip
+    llama-cpp
+    aider-chat-full
+    php84
+    php84Packages.composer
+    tmux
+    helix
+    wayvnc
+    zeal
+    kdePackages.kdenlive
     # --------
 
     #(wrapOBS {
@@ -573,7 +573,7 @@
     enable = true;
     package = pkgs.mariadb;
   };
-  systemd.services.mysql.wantedBy = lib.mkForce [];
+  systemd.services.mysql.wantedBy = lib.mkForce [ ];
 
   services.flatpak.enable = true;
 
@@ -589,32 +589,31 @@
   };
   #--------------------------------
 
-  
   fonts.packages = with pkgs; [
-     noto-fonts
-     noto-fonts-cjk-sans       # Jurus anti kotak-kotak Jepang
-     font-awesome              # Ikon widget Caelestia
-     nerd-fonts.jetbrains-mono # Font terminal
-     corefonts
-     nerd-fonts.fira-code
-     monocraft
+    noto-fonts
+    noto-fonts-cjk-sans # Jurus anti kotak-kotak Jepang
+    font-awesome # Ikon widget Caelestia
+    nerd-fonts.jetbrains-mono # Font terminal
+    corefonts
+    nerd-fonts.fira-code
+    monocraft
   ];
 
-   environment.shellAliases = {
-    
+  environment.shellAliases = {
+
     #gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     #rb = "sudo nixos-rebuild switch --flake /etc/nixos#nix";
     #rbf = "sudo nixos-rebuild switch --no-reexec --flake /etc/nixos#nix";
     #rbo = "sudo nixos-rebuild switch --no-reexec --option substitute false --flake /etc/nixos#nix";
-    #gc = "sudo nix-collect-garbage -d -v";  
+    #gc = "sudo nix-collect-garbage -d -v";
     #up = "nix flake update /etc/nixos && sudo nixos-rebuild switch --flake /etc/nixos#nix";
 
     gen = "nh os info";
-    rb  = "nh os switch /etc/nixos#nix -v";
+    rb = "nh os switch /etc/nixos#nix -v";
     rbf = "nh os switch --no-reexec /etc/nixos#nix";
     rbo = "nh os switch --no-reexec -- --option substitute false /etc/nixos#nix";
-    gc  = "nh clean all";
-    up  = "nh os switch --update /etc/nixos#nix";
+    gc = "nh clean all";
+    up = "nh os switch --update /etc/nixos#nix";
 
     ls = "eza --icons --group-directories-first";
     ll = "eza -l --icons --group-directories-first";
@@ -636,19 +635,18 @@
 
   # Aktifkan Gamescope
   programs.gamescope = {
-    enable = true; 
+    enable = true;
   };
 
   programs.zsh.enable = true;
 
   services.tumbler.enable = true;
-  
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true; # Wajib buat Steam & Proton (32-bit games/libraries)
 
     # Driver akselerasi Intel (VA-API & Vulkan)
-    
 
     extraPackages = with pkgs; [
       intel-media-driver # Driver VA-API resmi Intel buat Gen 9+ (i5-8250U)
@@ -657,14 +655,12 @@
       vulkan-tools
       libvdpau-va-gl
     ];
-    
+
     # Versi 32-bit driver Intel biar Steam 32-bit rendering-nya jos
     extraPackages32 = with pkgs; [
       intel-media-driver
     ];
   };
-
-
 
   #xdg.portal = {
   #  enable = true;
@@ -684,20 +680,20 @@
   #  };
   #  };
 
-    #config.niri = {
-    #  # Use GNOME for screen sharing (Niri implements the Mutter interface)
-    #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-    #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-    #
-    #  # Use GTK for file choosers (avoids Nautilus dependency)
-    #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-    #  "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
-    #};
-    #
-    #config.common = {
-    #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-    #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-    #};
+  #config.niri = {
+  #  # Use GNOME for screen sharing (Niri implements the Mutter interface)
+  #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+  #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+  #
+  #  # Use GTK for file choosers (avoids Nautilus dependency)
+  #  "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+  #  "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+  #};
+  #
+  #config.common = {
+  #  "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+  #  "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+  #};
   #};
 
   #environment.sessionVariables.XDG_CURRENT_DESKTOP = "niri:GNOME";
@@ -708,8 +704,6 @@
   #  XDG_SESSION_DESKTOP = "niri";
   #};
 
-  
-
   # (Opsional) Nyalain GameMode biar CPU i5-8250U lu gak ketahan power saving pas main game
   programs.gamemode.enable = true;
 
@@ -719,34 +713,41 @@
   services.undervolt = {
     enable = true;
     temp = 85;
-    
+
     # Voltage Offset (dalam mV, pake angka negatif)
-    coreOffset = -100;   # CPU Core
-    gpuOffset = -25;     # Integrated GPU (Intel UHD 620)
-    uncoreOffset = -25;    # iGPU Unslice / Uncore (-25.4 mV)
-    
+    coreOffset = -100; # CPU Core
+    gpuOffset = -25; # Integrated GPU (Intel UHD 620)
+    uncoreOffset = -25; # iGPU Unslice / Uncore (-25.4 mV)
+
     useTimer = true;
     # Pengaturan Power Limit (Optional, biar makin adem)
-    
+
     p1 = {
       limit = 20;
       window = 28;
-    }; 
-    
-    p2 = { 
+    };
+
+    p2 = {
       limit = 30;
       window = 28;
-    }; 
+    };
   };
-  
+
   users.users.ciel = {
     isNormalUser = true;
     description = "ciel";
     shell = pkgs.zsh; # <-- TAMBAHKAN BARIS INI!
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" "render" "wireshark"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+      "docker"
+      "render"
+      "wireshark"
+    ];
   };
 
-  
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
@@ -755,14 +756,17 @@
     ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.settings = {
     eval-cache = true;
     #Otomatis bersihkan file installer corrupt / setengah download
     keep-outputs = false;
     keep-derivations = false;
 
-    http-connections = 50; #50 orang kerja free labor
+    http-connections = 50; # 50 orang kerja free labor
     max-substitution-jobs = 128;
 
     # MASUKKAN CACHE XDDXDD DI SINI:
@@ -776,28 +780,31 @@
       "chaotic-nyx.cachix.org-1:1g/B464uu16beB4y9RAG05oYgKmg8C8y6jvgfL/o+B4="
       #"lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
     ];
-  }; 
+  };
 
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-  
+
   nix.optimise = {
     automatic = true;
     dates = [ "weekly" ]; # Menjalankan hardlink deduplication seminggu sekali di background
   };
-
 
   # --------------CACHY KERNEL-------------------
   #nixpkgs.overlays = [
   #  inputs.nix-cachyos-kernel.overlays.pinned
   #];
 
-  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" ];
+  boot.supportedFilesystems = [
+    "ntfs"
+    "exfat"
+    "vfat"
+  ];
   security.polkit.enable = true;
-  
+
   #boot.kernelPackages = pkgs.linuxPackages_zen_latest;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   #boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
@@ -811,7 +818,7 @@
 
   # 2. Panggil Kernel BORE LTO v3
   #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
-  
+
   # Mengunci & me-override paket kernel LTS
   # =========================================================================
   # 1. RACIKAN KERNEL TKG-BORE LTS 6.6 (LLVM / ThinLTO / x86-64-v3)
@@ -820,29 +827,29 @@
   #  kernel = super.kernel.override {
   #    # Compiler LLVM / Clang
   #    stdenv = pkgs.llvmPackages_latest.stdenv;
-  #    
+  #
   #    structuredExtraConfig = with lib.kernel; {
   #      # BORE Scheduler
   #      SCHED_BORE = yes;
-  #      
+  #
   #      # CPU Microarchitecture Tuning (Target Intel Gen 8 / Core2)
   #      MCORE2 = yes;
   #      GENERIC_CPU = no;
-  #      
+  #
   #      # ThinLTO Optimization
   #      LTO_NONE = no;
   #      LTO_CLANG_THIN = yes;
-  #      
+  #
   #      # Low-Latency & Input Speed (Full Preemption + 1000Hz)
   #      PREEMPT_SERVER = no;
   #      PREEMPT_RT = no;
   #      PREEMPT = lib.mkForce yes;
   #      HZ_1000 = yes;
-  #      
+  #
   #      # Gaming & Syscall Sync (Futex2 / Fsync)
   #      FUTEX = yes;
   #      FUTEX_PI = yes;
-  #      
+  #
   #      # Google BBR Network Speedup
   #      TCP_CONG_BBR = yes;
   #      DEFAULT_BBR = yes;
@@ -862,8 +869,6 @@
   #    ];
   #  };
   #});
-
-
 
   #services.scx = {
   #  enable = true;
@@ -895,7 +900,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  
+
   networking.firewall = {
     enable = true;
     ## Port TCP wajib Sunshine & GameStream
@@ -930,4 +935,3 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-
