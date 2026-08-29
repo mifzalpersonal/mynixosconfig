@@ -475,8 +475,10 @@
     flatpak
     file
     obs-studio
+    distrobox
     ventoy-full
     modprobed-db
+    bash
 
     #sehari hari alias bloat
     gnome-calculator # Kalkulator GTK simpel & responsif
