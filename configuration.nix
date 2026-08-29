@@ -544,6 +544,7 @@
      clang
      python313
      vscode
+     zed-editor
      go
      docker
      winboat
