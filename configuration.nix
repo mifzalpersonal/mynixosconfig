@@ -28,6 +28,8 @@
 
   systemd.services.NetworkManager-wait-online.enable = false;
   boot.kernelParams = [
+    "intel_pstate=active"
+    "i915.enable_guc=2"
     "quiet"
     #"splash"
     "loglevel=3"

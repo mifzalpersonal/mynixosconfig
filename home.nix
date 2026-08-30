@@ -103,7 +103,7 @@
       _evalcache zoxide init zsh
 
       # --- CONFIGURATION FOR AUTO-NOTIFY ---
-      AUTO_NOTIFY_THRESHOLD=1
+      AUTO_NOTIFY_THRESHOLD=5
       
       # Format teks notifikasi bawaan plugin-nya
       AUTO_NOTIFY_TITLE="Process Finished"
