@@ -143,6 +143,9 @@
       confirm_os_window_close = 0;
       disable_ligatures = "never";
 
+      enable_audio_bell = true;
+      custom_bell_sound = "/home/ciel/Music/persona.wav";
+
       # --- EFEK REAKTIF / TRAIL (Fitur Kitty Terbaru) ---
       # Mengaktifkan efek ekor/jejak saat kursor bergerak/ketik
       cursor_trail = "3";

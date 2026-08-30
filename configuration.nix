@@ -461,6 +461,7 @@
     bat
     s-tui
     chafa
+    wl-clipboard
     #------
 
     brave
