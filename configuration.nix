@@ -41,7 +41,6 @@
     "udev.log_priority=3"
 
     "i915.enable_psr=1" # Disable Panel Self Refresh (Fix flicker/stutter di UHD 620)
-    "i915.fastboot=1" # Seamless boot transition
 
     # FIX: Matikan probing serial port jadul 8250 (Eliminasi delay 5.5s ttyS0-S3)
     "8250.nr_uarts=0"
@@ -50,11 +49,9 @@
     "tpm_tis.disable=1"
 
     # OPTIMASI BOOT DRIVE: Probing device SATA/SD Card secara asinkron (Eliminasi delay sda/sdb)
-    "scsi_mod.use_blk_mq=1"
     "async_probe=all"
 
-    # Aktifkan PCIe Active State Power Management (ASPM) secara agresif
-    "pcie_aspm=force"
+    "pcie_aspm=powersave" # Aktifkan ASPM powersave untuk hemat daya
 
     # Fitur hemat daya khusus GPU Intel UHD 620
     "i915.enable_dc=2"
@@ -450,6 +447,8 @@
     gobject-introspection
 
     #larp
+    powertop
+    libnotify
     btop
     fastfetch
     yazi
