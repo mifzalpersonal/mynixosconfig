@@ -14,9 +14,10 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./helix.nix
     ./cysec.nix
+    ./helix.nix
     ./zsh.nix
+    ./nvf.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -776,13 +777,9 @@
     # MASUKKAN CACHE XDDXDD DI SINI:
     substituters = [
       "https://cache.nixos.org"
-      "https://nyx.chaotic.cx"
-      #"https://attic.xuyh0120.win/lantian"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "chaotic-nyx.cachix.org-1:1g/B464uu16beB4y9RAG05oYgKmg8C8y6jvgfL/o+B4="
-      #"lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
     ];
   };
 
