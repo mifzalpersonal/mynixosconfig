@@ -2,50 +2,55 @@
 
 {
   programs.nvf = {
-    enable = true;
+  enable = true;
 
-    settings.vim = {
-      viAlias = true;
-      vimAlias = true;
+  settings.vim = {
+    lsp.enable = true;
 
-      # 1. Tombol Spasi Cheatsheet (which-key)
-      binds.whichKey.enable = true;
+    globals.mapleader = " ";
 
-      # 2. File Selector & Picker (FZF atau Telescope)
-      # Pilih salah satu (atau keduanya):
-      fzf.cmake-passthrough = false; # FZF Lua Integration
-      fzf.enable = true;             # Pakai fzf-lua
+    keymaps = [
+      # Filetree (Space + e)
+      { key = "<leader>e"; action = ":Neotree toggle<CR>"; mode = "n"; desc = "Toggle Filetree"; }
 
-      # 3. Buffer Line (Tab Bar / Buffer Selector)
-      tabline.nvimBufferline.enable = true;
+      # Search teks di project (Space + f kecil)
+      { key = "<leader>f"; action = ":Telescope live_grep<CR>"; mode = "n"; desc = "Search Text"; }
 
-      # File Tree / File Explorer Sidebar (NvimTree)
-      filetree.nvimTree.enable = true;
-      
-      theme = {
-        enable = true;
-        name = "catppuccin";
-        style = "mocha";
-      };
+      # Search file (Space + F besar / Space + Shift + f)
+      { key = "<leader>F"; action = ":Telescope find_files<CR>"; mode = "n"; desc = "Search Files"; }
 
-      statusline.lualine.enable = true;
-      telescope.enable = true;
-      autocomplete.nvim-cmp.enable = true;
-      treesitter.enable = true;
+      # Lihat buffer (Space + b)
+      { key = "<leader>b"; action = ":Telescope buffers<CR>"; mode = "n"; desc = "View Buffers"; }
 
-      lsp.enable = true;
+      { key = "<leader>x"; action = ":Telescope diagnostics<CR>"; mode = "n"; desc = "Show All Workspace Diagnostics"; }
+    ];
 
-      languages = {
-        nix.enable = true;
-        php.enable = true;
-        
-        # 🔑 Ganti 'ts' jadi 'tsx'
-        tsx.enable = true;
-        
-        # Opsional untuk web dev:
-        html.enable = true;
-        css.enable = true;
-      };
+
+    languages = {
+      enableTreesitter = true;
+      enableFormat = true;
+
+      nix.enable = true;
+      lua.enable = true;
+      python.enable = true;
+      go.enable = true;
+      typescript.enable = true;
+      rust.enable = true;
+    };
+
+    autocomplete.nvim-cmp.enable = true;
+    telescope.enable = true;
+    filetree.neo-tree.enable = true;
+
+    git.gitsigns.enable = true;
+
+    statusline.lualine.enable = true;
+
+    theme = {
+      enable = true;
+      name = "catppuccin";
+      style = "mocha";
     };
   };
+};
 }
