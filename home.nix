@@ -117,7 +117,7 @@
         echo 0 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
         echo "balance_performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference
         "$@"
-        echo "power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference
+        echo "balance_power" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference
         echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
       }
     '';

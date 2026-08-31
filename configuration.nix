@@ -300,7 +300,7 @@
 
       # Atur Energy Performance Preference (EPP) biar pinter ngatur clock
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
@@ -544,7 +544,6 @@
     # devs thingy
     laravel
     mariadb
-    php
     nodejs
     clang
     python313
@@ -556,16 +555,20 @@
     python313Packages.pip
     llama-cpp
     aider-chat-full
-    php84
-    php84Packages.composer
+    php82
+    php82Packages.composer
     tmux
     helix
     wayvnc
-    zeal
+    zeal   
     kdePackages.kdenlive
+    mediainfo
+    frei0r
+    glaxnimate
+    gsettings-desktop-schemas
     # --------
 
-    #(wrapOBS {
+    #(wrapobs {
     #  plugins = with obs-studio-plugins; [
     #    obs-pipewire-audio-capture
     #    wlrobs
@@ -573,7 +576,7 @@
     #})
   ];
 
-  #-------------DEVSSS-------------
+  #-------------devsss-------------
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
