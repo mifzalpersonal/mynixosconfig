@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  programs.nvf.enableManpages = true;
   programs.nvf = {
   enable = true;
 
@@ -25,7 +26,6 @@
       { key = "<leader>x"; action = ":Telescope diagnostics<CR>"; mode = "n"; desc = "Show All Workspace Diagnostics"; }
     ];
 
-    
      filetype = {
       extension = {
         "blade.php" = "php";    
@@ -51,14 +51,17 @@
      tabstop = 2;
      expandtab = true;
      smartindent = false; # Matikan smartindent bawaan yang suka ngawur di Nix
+     ignorecase = true;
+     smartcase = true;
     };
 
-    autocomplete.nvim-cmp.enable = true;
+    autocomplete.blink-cmp.enable = true;
     telescope.enable = true;
     filetree.neo-tree.enable = true;
     autopairs.nvim-autopairs.enable = true;
     treesitter.indent.enable = true;
     git.gitsigns.enable = true;
+    tabline.nvimBufferline.enable = true;
 
     statusline.lualine.enable = true;
 
