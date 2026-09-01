@@ -43,6 +43,27 @@
      
       { key = "<S-Tab>"; action = "<cmd>BufferLineCyclePrev<CR>"; mode = "n"; desc = "Previous Buffer"; }
 
+      {
+        key = "<leader>gd";
+        action = ":DiffviewOpen<CR>";
+        mode = "n";
+        desc = "Git Diff";
+      }
+
+      {
+        key = "<leader>gh";
+        action = ":DiffviewFileHistory<CR>";
+        mode = "n";
+        desc = "Git File History";
+      }
+
+      {
+        key = "<leader>gc";
+        action = ":DiffviewClose<CR>";
+        mode = "n";
+        desc = "Close Git Diff";
+      }
+
     ];
 
      filetype = {
@@ -128,10 +149,13 @@
      smartcase = true;
      wrap = false;
      linebreak = true;
+     relativenumber = false;
     };
 
 
     # fitur tambahan alias plugin
+    binds.whichKey.enable = true;
+    utility.diffview-nvim.enable = true;
     autocomplete.blink-cmp.enable = true;
     autocomplete.blink-cmp.friendly-snippets.enable = true;
     utility.motion.flash-nvim.enable = true;
