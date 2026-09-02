@@ -64,6 +64,13 @@
         desc = "Close Git Diff";
       }
 
+      {
+        key = "<leader>sr";
+        action = ":GrugFar<CR>";
+        mode = "n";
+        desc = "Search & Replace";
+      }
+
     ];
 
      filetype = {
@@ -155,6 +162,7 @@
 
     # fitur tambahan alias plugin
     binds.whichKey.enable = true;
+    utility.grug-far-nvim.enable = true;
     utility.diffview-nvim.enable = true;
     autocomplete.blink-cmp.enable = true;
     autocomplete.blink-cmp.friendly-snippets.enable = true;
