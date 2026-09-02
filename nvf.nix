@@ -144,7 +144,7 @@
      shiftwidth = 2;
      tabstop = 2;
      expandtab = true;
-     smartindent = false; # Matikan smartindent bawaan yang suka ngawur di Nix
+     smartindent = true; # Matikan smartindent bawaan yang suka ngawur di Nix
      ignorecase = true;
      smartcase = true;
      wrap = false;
@@ -160,7 +160,21 @@
     autocomplete.blink-cmp.friendly-snippets.enable = true;
     utility.motion.flash-nvim.enable = true;
     telescope.enable = true;
-    filetree.neo-tree.enable = true;
+    filetree.neo-tree = {
+      enable = true;
+      setupOpts = {
+        filesystem = {
+          filtered_items = {
+            visible = true;
+            hide_dotfiles = false;
+            hide_gitignored = false;
+          };
+          follow_current_file.enabled = true;
+        };
+        default_component_configs.indent.with_expanders = true;
+      };
+    };
+
     autopairs.nvim-autopairs.enable = true;
     treesitter.indent.enable = true;
     git.gitsigns.enable = true;
