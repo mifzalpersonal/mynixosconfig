@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   
@@ -125,6 +125,14 @@
        underline = true,
        update_in_insert = false,
      })
+    '';
+
+    snippets.luasnip.enable = true;
+
+    luaConfigRC.custom-snippets = ''
+      require("luasnip.loaders.from_vscode").lazy_load({
+        paths = { "/etc/nixos/snippets" }
+      })
     '';
 
     diagnostics.nvim-lint.enable = true;
